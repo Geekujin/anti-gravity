@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* ==========================================================================
-   ANTI-GRAVITY  v2.3
+   ANTI-GRAVITY  v2.4
    Docs:          https://style.rogues.nexus/
    Release notes: https://style.rogues.nexus/v2/
    A neo-cyberpunk UI kit: wide display type for headings and key data,
@@ -454,6 +454,19 @@
 }
 a.ag-card { text-decoration: none; color: inherit; transition: border-color var(--ag-fast) var(--ag-ease); }
 a.ag-card:hover { border-color: var(--ag-accent); color: inherit; }
+
+/* Whole-card link: put one link on the title and add .ag-card--link to the card.
+   The link's ::after covers the card, so the whole tile is clickable while the
+   link's name stays the title. Give any second link inside the card
+   position: relative; z-index: 2 so it sits above the cover. */
+.ag-card--link { position: relative; cursor: pointer; transition: border-color var(--ag-fast) var(--ag-ease); }
+.ag-card--link a { color: inherit; text-decoration: none; }
+.ag-card--link a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.ag-card--link:hover { border-color: var(--ag-accent); }
+.ag-card--link:hover a { color: var(--ag-accent-text); }
+/* The card is clipped, so an outside ring would be cut off: draw it inside */
+.ag-card--link a:focus-visible { outline: none; }
+.ag-card--link:has(a:focus-visible) { border-color: var(--ag-accent); box-shadow: inset 0 0 0 var(--ag-stroke) var(--ag-accent); }
 
 .ag-card__head {
   display: flex;
