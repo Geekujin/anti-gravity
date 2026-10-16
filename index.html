@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-accent="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anti-Gravity</title>
+<meta name="description" content="Anti-Gravity: a neo-cyberpunk stylesheet. How to use it, and every element it styles.">
+<link rel="stylesheet" href="v2/anti-gravity.css">
+<style>
+  /* Page-only helpers for the showcase. Not part of anti-gravity.css. */
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); background: var(--ag-bg); }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 96px); scroll-behavior: smooth; }
+  .ag-nav--sticky { top: env(safe-area-inset-top, 0px); }
+  .section { display: flex; flex-direction: column; gap: 28px; }
+  .section__head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 14px; border-bottom: 2px solid var(--ag-rule); }
+  .spec { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .spec > code.ag-code { color: var(--ag-accent-text); text-transform: none; }
+  .token { display: flex; flex-direction: column; gap: 6px; }
+  .token__chip { height: 56px; border: 2px solid var(--ag-rule); }
+  .type-row { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--ag-rule); }
+  .type-row > code { color: var(--ag-accent-text); }
+  .nav-demo .ag-nav { position: static; }
+  @media (max-width: 640px) { .ag-nav__end .ag-swatch { display: none; } }
+  @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; gap: 6px; } }
+  .ai-note { display: flex; flex-direction: column; gap: 8px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--ag-rule); }
+  .spec-note { margin: 0; max-width: 72ch; color: var(--ag-secondary); font-size: 15px; line-height: 1.5; }
+  .snippet { border-top: 1px solid var(--ag-rule); padding-top: 8px; }
+  .snippet > summary { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; font-family: var(--ag-font-mono); font-size: 12px; text-transform: uppercase; color: var(--ag-muted); cursor: pointer; list-style: none; }
+  .snippet > summary::-webkit-details-marker { display: none; }
+  .snippet > summary::before { content: "+"; color: var(--ag-accent-text); }
+  .snippet[open] > summary::before { content: "\2212"; }
+  .snippet > summary:hover { color: var(--ag-ink); }
+  .snippet pre { margin-top: 8px; max-height: 380px; font-size: 13px; }
+  .snippet__copy { margin-left: auto; }
+  .steps { display: grid; gap: 28px; }
+  .step { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .step__num { font-family: var(--ag-font-display); font-size: 28px; line-height: 1; color: var(--ag-accent); }
+  .step__body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .step__body h3 { margin: 0; }
+  @media (max-width: 640px) { .step { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+</head>
+<body class="ag">
+
+<!-- ===== Nav bar (.ag-nav.ag-nav--sticky) ===== -->
+<nav class="ag-nav ag-nav--sticky" aria-label="Sections">
+  <a class="ag-nav__brand" href="#top">Anti-Gravity</a>
+  <ul class="ag-nav__links" id="site-nav">
+    <li><a href="#start" aria-current="page">Start</a></li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#navigation">Navigation</a></li>
+    <li><a href="#controls">Controls</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#feedback">Feedback</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#patterns">Patterns</a></li>
+    <li><a href="#versions">Versions</a></li>
+  </ul>
+  <div class="ag-nav__end">
+    <button class="ag-btn ag-btn--sm" type="button" id="theme-toggle" aria-label="Switch to light theme">Light</button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="signal" aria-pressed="true" aria-label="Signal red" style="--ag-swatch: var(--ag-signal)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="neon" aria-pressed="false" aria-label="Neon pink" style="--ag-swatch: var(--ag-neon)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="jensen" aria-pressed="false" aria-label="Jensen orange" style="--ag-swatch: var(--ag-jensen)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="2077" aria-pressed="false" aria-label="2077 yellow" style="--ag-swatch: var(--ag-2077)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="hack" aria-pressed="false" aria-label="Hack green" style="--ag-swatch: var(--ag-hack)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="gibson" aria-pressed="false" aria-label="Gibson cyan" style="--ag-swatch: var(--ag-gibson)"><span></span></button>
+  </div>
+</nav>
+
+<div class="ag-shell" id="top" style="gap: 72px">
+
+  <!-- ===== Header ===== -->
+  <header class="ag-header">
+    <div class="ag-header__bar">
+      <span class="ag-code">ID:AG-0x02 &#xB7; v2.3 &#xB7; style.rogues.nexus</span>
+      <span class="ag-barcode" aria-hidden="true"></span>
+      <span class="ag-status ag-status--pulse">System nominal</span>
+    </div>
+    <h1 class="ag-display ag-display--xl ag-glow">Anti-<span class="ag-accent">gravity</span></h1>
+    <div class="ag-row" style="--ag-gap: 16px">
+      <p class="ag-slogan">by any means.</p>
+      <span class="ag-kana" lang="ja">&#x30A2;&#x30F3;&#x30C1;&#x30B0;&#x30E9;&#x30D3;&#x30C6;&#x30A3;</span>
+    </div>
+    <div class="ag-hazard" aria-hidden="true"></div>
+    <p class="ag-text">A neo-cyberpunk stylesheet for websites, dashboards and small tools. One file, no framework, no build step. Link it, add one class, and plain HTML picks up the look; the <code>.ag-*</code> classes on this page add the rest.</p>
+    <p class="ag-text">Every example below is live. Its label is the class that draws it; open <b>Code</b> under any example for markup you can copy. The theme and highlight controls in the bar restyle the whole page.</p>
+  </header>
+
+
+  <!-- ===== 00 Start ===== -->
+  <section class="section" id="start">
+    <div class="section__head">
+      <h2>00 Getting started</h2>
+      <p class="ag-text">Five minutes from a blank page to a working layout.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step__num">01</div><div class="step__body">
+        <h3>Link the stylesheet</h3>
+        <p class="spec-note">Add this to the <code>&lt;head&gt;</code> of every page. The <code>/v2/</code> file updates in place with fixes and new elements, and never with changes that break your markup.</p>
+<pre><code>&lt;link rel="stylesheet" href="https://style.rogues.nexus/v2/anti-gravity.css"&gt;</code></pre>
+      </div></div>
+      <div class="step"><div class="step__num">02</div><div class="step__body">
+        <h3>Set the theme, the highlight and the body class</h3>
+        <p class="spec-note"><code>data-theme</code> and <code>data-accent</code> go on <code>&lt;html&gt;</code>; <code>class="ag"</code> goes on <code>&lt;body&gt;</code> and switches the styles on.</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en" data-theme="dark" data-accent="signal"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Example Site&lt;/title&gt;
+  &lt;link rel="stylesheet" href="https://style.rogues.nexus/v2/anti-gravity.css"&gt;
+&lt;/head&gt;
+&lt;body class="ag"&gt;
+  &lt;header class="ag-shell"&gt;
+    &lt;a class="ag-display" href="/"&gt;Example&lt;/a&gt;
+    &lt;nav aria-label="Main"&gt;
+      &lt;ul class="ag-linkline"&gt;
+        &lt;li&gt;&lt;a href="/" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/projects/"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main class="ag-shell"&gt;
+    &lt;article class="ag-prose"&gt;&#x2026;&lt;/article&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <div class="ag-table-wrap"><table class="ag-table ag-table--compact">
+          <thead><tr><th>Attribute</th><th>Values</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="ag-mono">data-theme</td><td class="ag-mono">dark &#xB7; light</td><td>Leave it off to follow the device setting.</td></tr>
+            <tr><td class="ag-mono">data-accent</td><td class="ag-mono">signal &#xB7; neon &#xB7; jensen &#xB7; 2077 &#xB7; hack &#xB7; gibson</td><td>Signal red is the default. Use one per site.</td></tr>
+            <tr><td class="ag-mono">class="ag"</td><td class="ag-mono">on &lt;body&gt;</td><td>Without it nothing is styled, so the stylesheet can sit beside other CSS safely.</td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+      <div class="step"><div class="step__num">03</div><div class="step__body">
+        <h3>Write plain HTML, then add components</h3>
+        <p class="spec-note">Headings, paragraphs, links, lists, quotes, tables, forms, <code>details</code>, <code>dialog</code>, <code>progress</code> and <code>meter</code> are styled with no classes. Wrap long text in <code>.ag-prose</code>, lay pages out with <code>.ag-shell</code>, <code>.ag-grid</code>, <code>.ag-stack</code> and <code>.ag-row</code>, and reach for the components below when you need them.</p>
+        <p class="spec-note">One rule to remember: a plain <code>&lt;button&gt;</code> or <code>&lt;code&gt;</code> is only styled automatically when it has no class. If you give one a class for scripting, add <code>.ag-btn</code> to the button as well.</p>
+      </div></div>
+      <div class="step"><div class="step__num">04</div><div class="step__body">
+        <h3>Mark state for people and screen readers</h3>
+        <p class="spec-note">The stylesheet draws state from accessibility attributes, so the look and what assistive tech announces always agree.</p>
+        <div class="ag-table-wrap"><table class="ag-table ag-table--compact">
+          <thead><tr><th>Attribute</th><th>Use it on</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td class="ag-mono">aria-current="page"</td><td>Nav, link line, menu and pager links</td><td>Highlights the current page.</td></tr>
+            <tr><td class="ag-mono">aria-pressed</td><td>Toggles, filter menus, button groups</td><td>Fills the active item with the highlight.</td></tr>
+            <tr><td class="ag-mono">aria-selected</td><td>Tabs</td><td>Underlines the selected tab.</td></tr>
+            <tr><td class="ag-mono">aria-disabled="true"</td><td>Pager links</td><td>Dims a step you can't take.</td></tr>
+            <tr><td class="ag-mono">aria-label</td><td>Icon-only buttons, each <code>&lt;nav&gt;</code></td><td>Names things that have no visible text.</td></tr>
+            <tr><td class="ag-mono">aria-hidden="true"</td><td>Hazard tape, barcodes, meters</td><td>Hides decoration from screen readers.</td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+      <div class="step"><div class="step__num">05</div><div class="step__body">
+        <h3>Optional: a custom highlight, self-hosted fonts and a load check</h3>
+        <p class="spec-note">A custom highlight needs three shades. The colour picker in the Colour section works them out for any colour you choose.</p>
+<pre><code>:root {
+  --ag-accent-dark:  #7CFF4F;  /* on Void */
+  --ag-accent-light: #4EA132;  /* on Bone: fills and large text, 3:1 or more */
+  --ag-accent-deep:  #3E7F27;  /* small text on Bone, 4.5:1 or more */
+}</code></pre>
+        <p class="spec-note">Fonts load from Google Fonts through an <code>@import</code> at the top of the stylesheet. To keep visitors off Google, serve Michroma, Chakra Petch, Share Tech Mono, Audiowide and Noto Sans JP (900) yourself and remove that line in your own copy.</p>
+        <p class="spec-note">The stylesheet ends with a marker, so a page can tell whether the whole file arrived:</p>
+<pre><code>if (!getComputedStyle(document.documentElement).getPropertyValue('--ag-loaded').trim()) {
+  console.warn('anti-gravity.css did not load completely');
+}</code></pre>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== 01 Colour ===== -->
+  <section class="section" id="colour">
+    <div class="section__head">
+      <h2>01 Colour</h2>
+      <p class="ag-text">Surfaces and text flip with the theme. The highlight is the only colour you swap; status tones stay fixed.</p>
+    </div>
+    <div class="ag-grid" style="--ag-grid-min: 150px">
+      <div class="token"><div class="token__chip" style="background: var(--ag-bg)"></div><code class="ag-code">--ag-bg</code><span class="ag-label js-token" data-token="--ag-bg"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-plate)"></div><code class="ag-code">--ag-plate</code><span class="ag-label js-token" data-token="--ag-plate"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-ink)"></div><code class="ag-code">--ag-ink</code><span class="ag-label js-token" data-token="--ag-ink"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-secondary)"></div><code class="ag-code">--ag-secondary</code><span class="ag-label js-token" data-token="--ag-secondary"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-muted)"></div><code class="ag-code">--ag-muted</code><span class="ag-label js-token" data-token="--ag-muted"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-rule)"></div><code class="ag-code">--ag-rule</code><span class="ag-label js-token" data-token="--ag-rule"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-idle)"></div><code class="ag-code">--ag-idle</code><span class="ag-label js-token" data-token="--ag-idle"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-accent)"></div><code class="ag-code">--ag-accent</code><span class="ag-label js-token" data-token="--ag-accent"></span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-accent-text)"></div><code class="ag-code">--ag-accent-text</code><span class="ag-label js-token" data-token="--ag-accent-text"></span></div>
+    </div>
+    <div class="ag-grid" style="--ag-grid-min: 150px">
+      <div class="token"><div class="token__chip" style="background: var(--ag-ok)"></div><code class="ag-code">--ag-ok</code><span class="ag-label ag-text-ok">.ag-text-ok</span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-warn)"></div><code class="ag-code">--ag-warn</code><span class="ag-label ag-text-warn">.ag-text-warn</span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-danger)"></div><code class="ag-code">--ag-danger</code><span class="ag-label ag-text-danger">.ag-text-danger</span></div>
+      <div class="token"><div class="token__chip" style="background: var(--ag-info)"></div><code class="ag-code">--ag-info</code><span class="ag-label ag-text-info">.ag-text-info</span></div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">data-accent="signal | neon | jensen | 2077 | hack | gibson"</code>
+      <p class="spec-note">Set on <code>&lt;html&gt;</code>. One highlight per site. Signal, Neon and Jensen look the same on both grounds; Hack and Gibson darken on Bone; 2077 is yellow on Void and turns grey on Bone.</p>
+      <div class="ag-row" role="group" aria-label="Highlight colour">
+        <button class="ag-swatch" type="button" data-set-accent="signal" aria-pressed="true" aria-label="Signal red" style="--ag-swatch: var(--ag-signal)"><span></span></button>
+        <button class="ag-swatch" type="button" data-set-accent="neon" aria-pressed="false" aria-label="Neon pink" style="--ag-swatch: var(--ag-neon)"><span></span></button>
+        <button class="ag-swatch" type="button" data-set-accent="jensen" aria-pressed="false" aria-label="Jensen orange" style="--ag-swatch: var(--ag-jensen)"><span></span></button>
+        <button class="ag-swatch" type="button" data-set-accent="2077" aria-pressed="false" aria-label="2077 yellow" style="--ag-swatch: var(--ag-2077)"><span></span></button>
+        <button class="ag-swatch" type="button" data-set-accent="hack" aria-pressed="false" aria-label="Hack green" style="--ag-swatch: var(--ag-hack)"><span></span></button>
+        <button class="ag-swatch" type="button" data-set-accent="gibson" aria-pressed="false" aria-label="Gibson cyan" style="--ag-swatch: var(--ag-gibson)"><span></span></button>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">Custom highlight: --ag-accent-dark, -light, -deep</code>
+      <p class="spec-note">Pick a colour to preview it. The <code>--ag-accent</code> and <code>--ag-accent-text</code> readouts above show the shades to copy into the three variables (see step 05).</p>
+      <div class="ag-check">
+        <input class="ag-color" id="custom-accent" type="color" value="#7CFF4F">
+        <label for="custom-accent" class="ag-label">Pick any colour. Its light (3:1) and deep (4.5:1) shades for Bone are worked out for you.</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02 Type ===== -->
+  <section class="section" id="type">
+    <div class="section__head">
+      <h2>02 Type</h2>
+      <p class="ag-text">Wide display type for headings and key data, Chakra Petch for reading, mono for codes and labels.</p>
+      <p class="spec-note">Headings need no classes. Use <code>.ag-value</code> for readouts, with the unit in <code>.ag-unit</code>, and <code>.ag-label</code> for the small grey text above them. Never set a headline that runs to two lines in the wide face; use <code>h4</code>. Taglines (<code>.ag-slogan</code>) are lowercase and end with a full stop. Use one katakana word (<code>.ag-kana</code>) per screen.</p>
+    </div>
+    <div>
+      <div class="type-row"><code class="ag-code">h1</code><h1>Signal lost</h1></div>
+      <div class="type-row"><code class="ag-code">h2</code><h2>Built for the night shift</h2></div>
+      <div class="type-row"><code class="ag-code">h3</code><h3>Section heading</h3></div>
+      <div class="type-row"><code class="ag-code">h4</code><h4>Readable sub-heading in Chakra Petch</h4></div>
+      <div class="type-row"><code class="ag-code">h5 &#xB7; h6</code><div class="ag-stack" style="--ag-gap: 4px"><h5>Overline label</h5><h6>Small overline</h6></div></div>
+      <div class="type-row"><code class="ag-code">.ag-display--xl</code><span class="ag-display ag-display--xl">Override</span></div>
+      <div class="type-row"><code class="ag-code">.ag-value--xl .ag-unit</code><span class="ag-value ag-value--xl">940<span class="ag-unit">Mb/s</span></span></div>
+      <div class="type-row"><code class="ag-code">.ag-value--accent</code><span class="ag-value ag-value--accent">1.84<span class="ag-unit">TB</span></span></div>
+      <div class="type-row"><code class="ag-code">.ag-text</code><span class="ag-text">Body copy for summaries and descriptions. Keep lines short and plain.</span></div>
+      <div class="type-row"><code class="ag-code">.ag-label &#xB7; .ag-code</code><div class="ag-row" style="--ag-gap: 20px"><span class="ag-label">Uplink status</span><span class="ag-code">STATUS: NON-COMPLIANT</span></div></div>
+      <div class="type-row"><code class="ag-code">.ag-slogan &#xB7; .ag-kana</code><div class="ag-row" style="--ag-gap: 20px"><span class="ag-slogan">trust no firmware.</span><span class="ag-kana" lang="ja">&#x30B7;&#x30B0;&#x30CA;&#x30EB;</span></div></div>
+      <div class="type-row"><code class="ag-code">.ag-kana--inverse &middot; --ink</code><div class="ag-row" style="--ag-gap:16px"><span class="ag-kana ag-kana--inverse" lang="ja">&#x30A2;&#x30F3;&#x30C1;&#x30B0;&#x30E9;&#x30D3;&#x30C6;&#x30A3;</span><span class="ag-kana ag-kana--inverse ag-kana--ink" lang="ja">&#x30A2;&#x30F3;&#x30C1;&#x30B0;&#x30E9;&#x30D3;&#x30C6;&#x30A3;</span></div></div>
+      <div class="type-row"><code class="ag-code">.ag-glow</code><span class="ag-display ag-display--md ag-glow ag-accent">Glow (dark only)</span></div>
+    </div>
+
+    <div class="spec">
+      <code class="ag-code">.ag-prose &#xB7; --left &#xB7; --center &#xB7; --right &#xB7; --full</code>
+      <p class="spec-note">Wrap articles and long text. Adds vertical rhythm and a 70-character measure; everything inside is plain HTML. The column sits left by default: <code>--center</code> and <code>--right</code> move it, and <code>--full</code> fills the space with a 16px gutter each side (a plate keeps its own padding). Change the measure with <code>--ag-prose-width</code> and the full-width gutter with <code>--ag-prose-gutter</code>.</p>
+      <div class="ag-btn-group snip-skip js-prose-align" role="group" aria-label="Prose placement">
+        <button class="ag-btn ag-btn--sm" type="button" aria-pressed="true" data-prose="">Left</button>
+        <button class="ag-btn ag-btn--sm" type="button" aria-pressed="false" data-prose="ag-prose--center">Centre</button>
+        <button class="ag-btn ag-btn--sm" type="button" aria-pressed="false" data-prose="ag-prose--right">Right</button>
+        <button class="ag-btn ag-btn--sm" type="button" aria-pressed="false" data-prose="ag-prose--full">Full</button>
+      </div>
+      <article class="ag-prose ag-plate" id="prose-demo">
+        <h2>Owning your stack</h2>
+        <p>Self-hosting is a choice about <strong>who holds the keys</strong>. Links look like <a href="#type">this</a>, and you can <mark>mark</mark> a phrase, use an <abbr title="Cascading Style Sheets">CSS</abbr>, show <del>old</del> <ins>new</ins> text, or press <kbd>Ctrl</kbd> + <kbd>K</kbd>. Inline code reads as <code>npm run build</code>.</p>
+        <ul>
+          <li>Unordered lists use a chevron marker</li>
+          <li>Nested lists keep the rhythm
+            <ul><li>Like this one</li></ul>
+          </li>
+        </ul>
+        <ol>
+          <li>Ordered lists count with zero padding</li>
+          <li>Numbers sit in mono, in the highlight colour</li>
+        </ol>
+        <blockquote>
+          The street finds its own uses for things.
+          <cite>Overheard at a swap meet</cite>
+        </blockquote>
+        <dl>
+          <dt>Host</dt><dd>node-01</dd>
+          <dt>Uptime</dt><dd>41 days</dd>
+        </dl>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 03 Code ===== -->
+  <section class="section" id="code">
+    <div class="section__head">
+      <h2>03 Code &amp; terminal</h2>
+      <p class="ag-text">Code always sits on void, in both themes. Works with highlight.js and Prism class names, or hand-written <code>.tk-*</code> spans.</p>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-codeblock &gt; .ag-codeblock__head + pre</code>
+      <p class="spec-note">Code always sits on Void. highlight.js and Prism output is coloured automatically; for hand-written snippets use <code>.tk-key</code>, <code>.tk-str</code>, <code>.tk-num</code>, <code>.tk-fn</code>, <code>.tk-var</code> and <code>.tk-com</code>. You wire up the copy button.</p>
+      <figure class="ag-codeblock">
+        <figcaption class="ag-codeblock__head"><span>fetch_status.py</span><button class="ag-codeblock__copy" type="button" data-copy>Copy</button></figcaption>
+<pre><code><span class="tk-com"># List the services running in a region</span>
+<span class="tk-key">import</span> requests
+
+API = <span class="tk-str">"https://api.example.com/v1/status"</span>
+TIMEOUT = <span class="tk-num">10</span>
+
+<span class="tk-key">def</span> <span class="tk-fn">services</span>(<span class="tk-var">region</span>):
+    r = requests.get(API, params={<span class="tk-str">"region"</span>: <span class="tk-var">region</span>}, timeout=TIMEOUT)
+    <span class="tk-key">return</span> [s[<span class="tk-str">"name"</span>] <span class="tk-key">for</span> s <span class="tk-key">in</span> r.json()[<span class="tk-str">"services"</span>]]</code></pre>
+      </figure>
+    </div>
+    <div class="ag-grid" style="--ag-grid-min: 320px">
+      <div class="spec">
+        <code class="ag-code">pre (plain)</code>
+        <p class="spec-note">A plain <code>&lt;pre&gt;&lt;code&gt;</code> gets the same block without the header.</p>
+<pre><code>$ systemctl status nginx
+&#x25CF; nginx.service - Web server
+   Active: active (running)</code></pre>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-prompt + .ag-cursor</code>
+        <p class="spec-note">A terminal prompt line. Change the marker with <code>--ag-prompt</code>. The cursor stops blinking when the device asks for reduced motion.</p>
+        <div class="ag-plate" style="padding: 20px 24px">
+          <p class="ag-prompt">ssh user@node-01</p>
+          <p class="ag-prompt" style="--ag-prompt: '$'">tail -f /var/log/app.log<span class="ag-cursor" aria-hidden="true"></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-log &gt; .ag-log__line &gt; .ag-log__level.ag-tone-*</code>
+      <p class="spec-note">Timestamped terminal lines. Levels take a tone: info, ok, warn or danger. Messages state facts plainly.</p>
+      <div class="ag-log" role="log">
+        <div class="ag-log__line"><time>06:00:01</time><span class="ag-log__level ag-tone-info">INFO</span><span>Connected to api.example.com</span></div>
+        <div class="ag-log__line"><time>06:00:03</time><span class="ag-log__level ag-tone-ok">OK</span><span>Synced 148 records in 2.1 s</span></div>
+        <div class="ag-log__line"><time>06:00:04</time><span class="ag-log__level ag-tone-warn">WARN</span><span>Request timed out, using cached copy</span></div>
+        <div class="ag-log__line"><time>06:00:05</time><span class="ag-log__level ag-tone-danger">ERR</span><span>Database unreachable on 192.0.2.40</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 Navigation ===== -->
+  <section class="section" id="navigation">
+    <div class="section__head">
+      <h2>04 Navigation</h2>
+      <p class="ag-text">The nav bar stays void with bone text in both themes. On phones the links drop to their own scrolling row.</p>
+    </div>
+
+    <div class="spec nav-demo">
+      <code class="ag-code">.ag-nav (slant: active link gets a skewed plate)</code>
+      <p class="spec-note">The full-width bar: Void with Bone text in both themes. Mark the current link with <code>aria-current="page"</code>; add <code>.ag-nav--sticky</code> to pin it. The brand block is optional, so leave it out under a site logo. On phones the links scroll sideways.</p>
+      <nav class="ag-nav" aria-label="Demo nav, slant">
+        <a class="ag-nav__brand" href="#navigation">Example</a>
+        <ul class="ag-nav__links js-demo-nav">
+          <li><a href="#navigation" aria-current="page">Home</a></li>
+          <li><a href="#navigation">Projects</a></li>
+          <li><a href="#navigation">Docs</a></li>
+          <li><a href="#navigation">About</a></li>
+        </ul>
+        <div class="ag-nav__end"><span>16.10.26</span></div>
+      </nav>
+    </div>
+
+    <div class="spec nav-demo">
+      <code class="ag-code">.ag-nav.ag-nav--notch (active link cut out of the bar)</code>
+      <p class="spec-note">The same bar, with the current link cut out as a tab in the page colour. It suits a bar sitting directly above the content.</p>
+      <nav class="ag-nav ag-nav--notch" aria-label="Demo nav, notch">
+        <a class="ag-nav__brand" href="#navigation">OPS/CON</a>
+        <ul class="ag-nav__links js-demo-nav">
+          <li><a href="#navigation">Overview</a></li>
+          <li><a href="#navigation" aria-current="page">Systems</a></li>
+          <li><a href="#navigation">Network</a></li>
+          <li><a href="#navigation">Security</a></li>
+        </ul>
+        <div class="ag-nav__end"><span class="ag-status">Live</span></div>
+      </nav>
+    </div>
+
+    <div class="spec">
+      <code class="ag-code">.ag-tabs &gt; .ag-tab[aria-selected] + .ag-tabpanel</code>
+      <p class="spec-note">Switches panels in place. Set <code>aria-selected</code> on the active tab and <code>hidden</code> on inactive panels; you supply the switching script.</p>
+      <div>
+        <div class="ag-tabs" role="tablist" aria-label="Demo tabs">
+          <button class="ag-tab" role="tab" type="button" aria-selected="true" aria-controls="tp-1" id="t-1">Overview</button>
+          <button class="ag-tab" role="tab" type="button" aria-selected="false" aria-controls="tp-2" id="t-2" tabindex="-1">Metrics</button>
+          <button class="ag-tab" role="tab" type="button" aria-selected="false" aria-controls="tp-3" id="t-3" tabindex="-1">Logs</button>
+        </div>
+        <div class="ag-tabpanel" role="tabpanel" id="tp-1" aria-labelledby="t-1"><p class="ag-text">Overview panel. Arrow keys move between tabs.</p></div>
+        <div class="ag-tabpanel" role="tabpanel" id="tp-2" aria-labelledby="t-2" hidden><p class="ag-text">Metrics panel.</p></div>
+        <div class="ag-tabpanel" role="tabpanel" id="tp-3" aria-labelledby="t-3" hidden><p class="ag-text">Logs panel.</p></div>
+      </div>
+    </div>
+
+    <div class="ag-grid" style="--ag-grid-min: 300px">
+      <div class="spec">
+        <code class="ag-code">.ag-crumbs</code>
+        <p class="spec-note">Shows where you are within a section. The last item is plain text with <code>aria-current="page"</code>.</p>
+        <ol class="ag-crumbs" aria-label="Breadcrumb">
+          <li><a href="#navigation">Home</a></li>
+          <li><a href="#navigation">Docs</a></li>
+          <li aria-current="page">Getting started</li>
+        </ol>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-linkline &middot; --text</code>
+        <p class="spec-note">A discreet text nav for under a site header. The current page sits on a highlight block; <code>--text</code> swaps the block for highlight-coloured text and a chevron. Wrap it in a <code>&lt;nav&gt;</code> with an <code>aria-label</code>.</p>
+        <nav aria-label="Link line demo"><ul class="ag-linkline js-linkline">
+          <li><a href="#navigation" aria-current="page">Home</a></li>
+          <li><a href="#navigation">Projects</a></li>
+          <li><a href="#navigation">Blog</a></li>
+          <li><a href="#navigation">About</a></li>
+        </ul></nav>
+        <nav aria-label="Link line text demo"><ul class="ag-linkline ag-linkline--text js-linkline">
+          <li><a href="#navigation">Home</a></li>
+          <li><a href="#navigation" aria-current="page">Projects</a></li>
+          <li><a href="#navigation">Blog</a></li>
+          <li><a href="#navigation">About</a></li>
+        </ul></nav>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-pager</code>
+        <p class="spec-note">Zero-padded page numbers. Mark the current page with <code>aria-current="page"</code> and an unavailable step with <code>aria-disabled="true"</code>.</p>
+        <nav class="ag-pager" aria-label="Pages">
+          <a href="#navigation" aria-label="Previous page">&#x2039;</a>
+          <a href="#navigation">01</a>
+          <a href="#navigation" aria-current="page">02</a>
+          <a href="#navigation">03</a>
+          <span>&#x2026;</span>
+          <a href="#navigation">12</a>
+          <a href="#navigation" aria-label="Next page">&#x203A;</a>
+        </nav>
+      </div>
+      <div class="spec">
+        <code class="ag-code">details.ag-dropdown &gt; .ag-dropdown__menu</code>
+        <p class="spec-note">No script needed: a <code>&lt;details&gt;</code> with any <code>.ag-btn</code> as its summary. <code>.ag-dropdown--end</code> aligns the menu right. Put destructive items last with <code>.is-danger</code>.</p>
+        <details class="ag-dropdown">
+          <summary class="ag-btn">Actions</summary>
+          <div class="ag-dropdown__menu">
+            <a href="#navigation">View source</a>
+            <a href="#navigation">Duplicate</a>
+            <a href="#navigation">Copy link</a>
+            <hr>
+            <a href="#navigation" class="is-danger">Delete item</a>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="ag-grid" style="--ag-grid-min: 280px">
+      <div class="spec">
+        <code class="ag-code">.ag-menu &gt; .ag-menu__item[aria-pressed]</code>
+        <p class="spec-note">A vertical filter or side menu. Use <code>aria-pressed</code> for filters and <code>aria-current</code> for links. Idle items are Void with Bone text in light mode.</p>
+        <div class="ag-menu js-menu" role="group" aria-label="Filter demo">
+          <button class="ag-menu__item" type="button" aria-pressed="true"><span>01 All</span><span class="ag-menu__count">12</span></button>
+          <button class="ag-menu__item" type="button" aria-pressed="false"><span>02 Active</span><span class="ag-menu__count">09</span></button>
+          <button class="ag-menu__item" type="button" aria-pressed="false"><span>03 Archived</span><span class="ag-menu__count">03</span></button>
+        </div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-list &gt; li.is-active</code>
+        <p class="spec-note">A simple file or item list with chevrons. Mark one row <code>.is-active</code>; metadata goes in <code>.ag-list__meta</code>.</p>
+        <ul class="ag-list">
+          <li>config.yaml<span class="ag-list__meta">2.4 KB</span></li>
+          <li class="is-active">main.py<span class="ag-list__meta">6.1 KB</span></li>
+          <li>README.md<span class="ag-list__meta">4.2 KB</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 Controls ===== -->
+  <section class="section" id="controls">
+    <div class="section__head">
+      <h2>05 Buttons, tags &amp; toggles</h2>
+      <p class="ag-text">Square edges, wide caps. Anything at rest in light mode sits in void with bone text; active takes the highlight.</p>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-btn &#xB7; --accent &#xB7; --primary &#xB7; --danger &#xB7; --ghost &#xB7; --slant &#xB7; :disabled &#xB7; .is-loading</code>
+      <p class="spec-note">One <code>--primary</code> per view. Labels are verbs, one to three words. <code>--slant</code> needs its label in a child <code>&lt;span&gt;</code>; <code>.is-loading</code> shows a busy state.</p>
+      <div class="ag-row">
+        <button class="ag-btn" type="button">Archive</button>
+        <button class="ag-btn ag-btn--accent" type="button">View details</button>
+        <button class="ag-btn ag-btn--primary" type="button">Deploy</button>
+        <button class="ag-btn ag-btn--danger" type="button">Wipe cache</button>
+        <button class="ag-btn ag-btn--ghost" type="button">Skip</button>
+        <button class="ag-btn ag-btn--primary ag-btn--slant" type="button"><span>Launch</span></button>
+        <button class="ag-btn" type="button" disabled>Next page</button>
+        <button class="ag-btn ag-btn--accent is-loading js-loading" type="button">Syncing</button>
+      </div>
+    </div>
+    <div class="ag-grid" style="--ag-grid-min: 280px">
+      <div class="spec">
+        <code class="ag-code">--sm &#xB7; --lg &#xB7; --icon &#xB7; .ag-btn-group</code>
+        <p class="spec-note">Sizes and shapes. Give every <code>--icon</code> button an <code>aria-label</code>. <code>.ag-btn-group</code> joins toggle buttons that use <code>aria-pressed</code>.</p>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn--sm" type="button">Small</button>
+          <button class="ag-btn ag-btn--lg" type="button">Large</button>
+          <button class="ag-btn ag-btn--icon" type="button" aria-label="Decrease">&#x2212;</button>
+          <button class="ag-btn ag-btn--icon" type="button" aria-label="Increase">+</button>
+        </div>
+        <div class="ag-btn-group js-group" role="group" aria-label="View">
+          <button class="ag-btn" type="button" aria-pressed="true">Day</button>
+          <button class="ag-btn" type="button" aria-pressed="false">Week</button>
+          <button class="ag-btn" type="button" aria-pressed="false">Month</button>
+        </div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">button (no class) &#xB7; input[type=submit|reset]</code>
+        <p class="spec-note">Unclassed buttons and submit or reset inputs get the default look automatically.</p>
+        <div class="ag-row">
+          <button type="button">Plain button</button>
+          <input type="submit" value="Submit">
+          <input type="reset" value="Reset">
+        </div>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-tag &#xB7; --outline &#xB7; --text &#xB7; --slant &#xB7; .ag-tone-*</code>
+      <p class="spec-note">Filled in the highlight by default. A <code>.ag-tone-*</code> class makes it a status tag and adds its glyph automatically (&#x2713; ! &#x2715; i). <code>--outline</code>, <code>--text</code> and <code>--slant</code> change the weight; <code>--slant</code> needs a child <code>&lt;span&gt;</code>.</p>
+      <div class="ag-row" style="--ag-gap: 12px">
+        <span class="ag-tag">Lead</span>
+        <span class="ag-tag ag-tone-ok">Online</span>
+        <span class="ag-tag ag-tone-warn">Degraded</span>
+        <span class="ag-tag ag-tone-danger">Breach</span>
+        <span class="ag-tag ag-tone-info">Update</span>
+        <span class="ag-tag ag-tag--outline">Featured</span>
+        <span class="ag-tag ag-tag--slant"><span>Hot</span></span>
+        <span class="ag-tag ag-tag--text">Archive</span>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-status &#xB7; --off &#xB7; --pulse &#xB7; .ag-tone-*</code>
+      <p class="spec-note">A square lamp and a word that states the condition. Tone it with <code>.ag-tone-*</code>, grey it with <code>--off</code>, blink it with <code>--pulse</code>. Danger lamps always blink.</p>
+      <div class="ag-row" style="--ag-gap: 24px">
+        <span class="ag-status">Stream live</span>
+        <span class="ag-status ag-tone-ok">Backup done</span>
+        <span class="ag-status ag-tone-warn ag-status--pulse">Low disk</span>
+        <span class="ag-status ag-status--off">Offline</span>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-toggles &gt; .ag-toggle[aria-pressed]</code>
+      <p class="spec-note">On/off tiles for dashboards and control panels. Your script updates <code>aria-pressed</code> and the state text.</p>
+      <div class="ag-toggles js-toggles">
+        <button class="ag-toggle" type="button" aria-pressed="true"><span class="ag-toggle__name">Firewall</span><span class="ag-toggle__state">Armed</span></button>
+        <button class="ag-toggle" type="button" aria-pressed="true"><span class="ag-toggle__name">VPN</span><span class="ag-toggle__state">080%</span></button>
+        <button class="ag-toggle" type="button" aria-pressed="false"><span class="ag-toggle__name">Debug</span><span class="ag-toggle__state">Off</span></button>
+        <button class="ag-toggle" type="button" aria-pressed="false"><span class="ag-toggle__name">Maintenance</span><span class="ag-toggle__state">Off</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 06 Forms ===== -->
+  <section class="section" id="forms">
+    <div class="section__head">
+      <h2>06 Forms</h2>
+      <p class="ag-text">Plain form elements are styled with no classes. The <code>.ag-*</code> versions do the same job when you need classes on them.</p>
+    </div>
+    <div class="spec">
+    <code class="ag-code">.ag-field &#xB7; .ag-input-group &#xB7; .ag-field__hint &#xB7; .ag-field__error</code>
+    <p class="spec-note">Put each control in an <code>.ag-field</code> with a <code>&lt;label&gt;</code>, and add a hint or an error under it (link an error to its input with <code>aria-describedby</code>). <code>.ag-input-group</code> adds a prefix or suffix. Unclassed inputs, selects and textareas are styled automatically; <code>.ag-input</code>, <code>.ag-select</code> and <code>.ag-textarea</code> do the same when you need classes.</p>
+    <form class="ag-grid" style="--ag-grid-min: 260px" onsubmit="return false">
+      <div class="ag-field">
+        <label for="f-user">Username</label>
+        <div class="ag-input-group">
+          <span class="ag-input-group__addon">$</span>
+          <input class="ag-input" id="f-user" type="text" placeholder="username" autocomplete="off">
+        </div>
+        <span class="ag-field__hint">.ag-input-group + __addon</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-pass">Passphrase</label>
+        <input id="f-pass" type="password" value="hunter2hunter2">
+        <span class="ag-field__hint">input[type=password]</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-mail">Alert email</label>
+        <input class="ag-input is-invalid" id="f-mail" type="email" value="not-an-email" aria-describedby="f-mail-err">
+        <span class="ag-field__error" id="f-mail-err">Enter an address like name@domain.tld</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-search">Search</label>
+        <input id="f-search" type="search" placeholder="Search the docs">
+        <span class="ag-field__hint">input[type=search]</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-feed">Region</label>
+        <select id="f-feed"><option>All regions</option><option>Europe</option><option>North America</option></select>
+        <span class="ag-field__hint">select</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-date">Start date</label>
+        <input id="f-date" type="date" value="2026-10-16">
+        <span class="ag-field__hint">input[type=date]</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-num">Page size</label>
+        <input id="f-num" type="number" value="12" min="1" max="50">
+        <span class="ag-field__hint">input[type=number]</span>
+      </div>
+      <div class="ag-field">
+        <label for="f-dis">Node ID</label>
+        <input id="f-dis" type="text" value="NODE-01" disabled>
+        <span class="ag-field__hint">:disabled</span>
+      </div>
+      <div class="ag-field" style="grid-column: 1 / -1">
+        <label for="f-notes">Tags</label>
+        <textarea id="f-notes" placeholder="one per line">design
+frontend
+accessibility</textarea>
+        <span class="ag-field__hint">textarea</span>
+      </div>
+    </form>
+    </div>
+
+    <div class="spec">
+    <code class="ag-code">fieldset &#xB7; label.ag-check &#xB7; .ag-checkbox &#xB7; .ag-radio &#xB7; .ag-switch &#xB7; .ag-range</code>
+    <p class="spec-note">Checkboxes are squares, radios are diamonds and switches are slanted bars (<code>role="switch"</code> or <code>.ag-switch</code>). Wrap each control and its text in <code>label.ag-check</code>, stack them in <code>.ag-choices</code> and group them in a <code>fieldset</code>. Controls that are off are Void with Bone in light mode.</p>
+    <div class="ag-grid" style="--ag-grid-min: 260px">
+      <fieldset>
+        <legend>Checkboxes</legend>
+        <div class="ag-choices">
+          <label class="ag-check"><input type="checkbox" checked> Email on alert</label>
+          <label class="ag-check"><input type="checkbox"> Include images</label>
+          <label class="ag-check"><input type="checkbox" class="ag-checkbox js-indeterminate"> Some items</label>
+          <label class="ag-check"><input type="checkbox" disabled> Locked</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Radios</legend>
+        <div class="ag-choices">
+          <label class="ag-check"><input type="radio" name="freq" checked> Daily</label>
+          <label class="ag-check"><input type="radio" name="freq"> Weekdays</label>
+          <label class="ag-check"><input type="radio" name="freq"> Weekly</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Switches</legend>
+        <div class="ag-choices">
+          <label class="ag-check"><input type="checkbox" role="switch" checked> Publish to web</label>
+          <label class="ag-check"><input type="checkbox" class="ag-switch"> Night mode</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Range, file, colour</legend>
+        <div class="ag-field">
+          <label for="f-range">Volume <span id="range-out">60</span></label>
+          <input id="f-range" type="range" min="0" max="100" value="60">
+        </div>
+        <input type="file" aria-label="Upload a file">
+        <div class="ag-check"><input type="color" value="#00D9FF" aria-label="Pick a colour"> <span>Accent</span></div>
+      </fieldset>
+    </div>
+    </div>
+  </section>
+
+  <!-- ===== 07 Feedback ===== -->
+  <section class="section" id="feedback">
+    <div class="section__head">
+      <h2>07 Feedback</h2>
+      <p class="ag-text">Alerts and toasts take a status tone. Progress bars are segmented; a bar with no value runs hazard stripes.</p>
+    </div>
+    <div class="spec">
+    <code class="ag-code">.ag-alert.ag-tone-* &gt; .ag-alert__body</code>
+    <p class="spec-note">Inline messages with a hazard edge in their tone; the title gets the status glyph automatically. The title is two or three words, the text says what happened and what to do. Use <code>role="alert"</code> only for danger and <code>role="status"</code> otherwise.</p>
+    <div class="ag-grid" style="--ag-grid-min: 300px">
+      <div class="ag-alert ag-tone-info" role="status"><div class="ag-alert__body"><span class="ag-alert__title">Update ready</span><span class="ag-alert__text">Version 2.3 adds prose placement: left, centre, right and full width.</span></div></div>
+      <div class="ag-alert ag-tone-ok" role="status"><div class="ag-alert__body"><span class="ag-alert__title">Backup complete</span><span class="ag-alert__text">Snapshot saved to the NAS at 03:00.</span></div></div>
+      <div class="ag-alert ag-tone-warn" role="status"><div class="ag-alert__body"><span class="ag-alert__title">Certificate expiring</span><span class="ag-alert__text">Renews in 6 days. Check the DNS record if it fails.</span></div></div>
+      <div class="ag-alert ag-tone-danger" role="alert"><div class="ag-alert__body"><span class="ag-alert__title">Login blocked</span><span class="ag-alert__text">Sign-in from an unknown country was refused.</span></div></div>
+    </div>
+    </div>
+
+    <div class="ag-grid" style="--ag-grid-min: 340px">
+      <div class="spec">
+        <code class="ag-code">.ag-toast.ag-tone-* (click to send one)</code>
+        <p class="spec-note">Brief confirmations. Stack them in a fixed <code>.ag-toast-stack</code> and remove each after about 4.5 seconds. The title repeats the action: <code>SAVE</code> becomes <code>SAVED</code>.</p>
+        <div class="ag-row snip-skip">
+          <button class="ag-btn ag-btn--sm" type="button" data-toast="ok">Ok</button>
+          <button class="ag-btn ag-btn--sm" type="button" data-toast="warn">Warn</button>
+          <button class="ag-btn ag-btn--sm" type="button" data-toast="danger">Danger</button>
+          <button class="ag-btn ag-btn--sm" type="button" data-toast="info">Info</button>
+        </div>
+        <div class="ag-toast ag-tone-ok" role="status">
+          <span class="ag-toast__icon" aria-hidden="true">&#x2713;</span>
+          <div class="ag-toast__body"><strong class="ag-toast__title">Saved</strong><span>Your settings are live.</span></div>
+          <button class="ag-toast__close" type="button" aria-label="Dismiss">&#xD7;</button>
+        </div>
+      </div>
+      <div class="spec" data-snippet-from="demo-dialog">
+        <code class="ag-code">dialog.ag-dialog</code>
+        <p class="spec-note">A native <code>&lt;dialog&gt;</code> opened with <code>showModal()</code>; Esc closes it. Put the safe action first and the destructive one last.</p>
+        <div class="ag-row"><button class="ag-btn ag-btn--accent" type="button" id="open-dialog">Open dialog</button></div>
+      </div>
+    </div>
+
+    <div class="ag-grid" style="--ag-grid-min: 260px">
+      <div class="spec">
+        <code class="ag-code">.ag-progress &gt; progress</code>
+        <p class="spec-note">A native <code>&lt;progress&gt;</code> drawn as a segmented bar. Leave out <code>value</code> for an indeterminate stripe.</p>
+        <div class="ag-progress"><div class="ag-progress__row"><span>Download</span><span>75%</span></div><progress value="75" max="100"></progress></div>
+        <div class="ag-progress ag-tone-ok"><div class="ag-progress__row"><span>Upload</span><span>100%</span></div><progress value="100" max="100"></progress></div>
+        <div class="ag-progress"><div class="ag-progress__row"><span>Indexing</span><span>&#x2026;</span></div><progress></progress></div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">meter (low / high / optimum)</code>
+        <p class="spec-note">A native <code>&lt;meter&gt;</code>. Segments turn ok, warn or danger according to <code>low</code>, <code>high</code> and <code>optimum</code>.</p>
+        <div class="ag-progress"><div class="ag-progress__row"><span>CPU</span><span>12%</span></div><meter min="0" max="100" low="60" high="85" optimum="10" value="12"></meter></div>
+        <div class="ag-progress"><div class="ag-progress__row"><span>Memory</span><span>68%</span></div><meter min="0" max="100" low="60" high="85" optimum="10" value="68"></meter></div>
+        <div class="ag-progress"><div class="ag-progress__row"><span>Disk</span><span>92%</span></div><meter min="0" max="100" low="60" high="85" optimum="10" value="92"></meter></div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-spinner &#xB7; .ag-meter</code>
+        <p class="spec-note">The spinner is for short waits; give it <code>role="status"</code> and an <code>aria-label</code>. <code>.ag-meter</code> is a decorative segmented bar: light segments with <code>.is-on</code> and state the number in text.</p>
+        <div class="ag-row" style="--ag-gap: 20px"><span class="ag-spinner" role="status" aria-label="Loading"></span><span class="ag-label">Awaiting input</span></div>
+        <div class="ag-meter" aria-hidden="true"><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div class="spec">
+      <code class="ag-code">details (plain) inside .ag-accordion</code>
+      <p class="spec-note">Plain <code>&lt;details&gt;</code> elements, grouped in <code>.ag-accordion</code>. No script needed.</p>
+      <div class="ag-accordion">
+        <details open><summary>What is Anti-Gravity?</summary><p>A stylesheet with a neo-cyberpunk look. No framework and no build step.</p></details>
+        <details><summary>Does it need JavaScript?</summary><p>No. Tabs, toasts and the theme switch on this page use a little script, but every style works without it.</p></details>
+        <details><summary>Can I change the colours?</summary><p>Set <code>data-accent</code> on the html element, or set your own with <code>--ag-accent-dark</code>, <code>--ag-accent-light</code> and <code>--ag-accent-deep</code>.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 08 Data ===== -->
+  <section class="section" id="data">
+    <div class="section__head">
+      <h2>08 Data</h2>
+      <p class="ag-text">Tables use mono headers over a highlight rule. Cards hold one big wide number each.</p>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-table-wrap &gt; .ag-table (plain table looks the same)</code>
+      <p class="spec-note">Wrap tables in <code>.ag-table-wrap</code> so they scroll on phones. Right-align numbers with <code>.ag-num</code> and show state with a lamp. <code>--striped</code> and <code>--compact</code> suit dense data.</p>
+      <div class="ag-table-wrap">
+        <table class="ag-table">
+          <caption>Services on node-01</caption>
+          <thead><tr><th>ID</th><th>Name</th><th>Status</th><th class="ag-num">CPU</th><th class="ag-num">Memory</th></tr></thead>
+          <tbody>
+            <tr><td class="ag-mono">101</td><td>web</td><td><span class="ag-status ag-tone-ok">Running</span></td><td class="ag-num">2.4%</td><td class="ag-num">128 MB</td></tr>
+            <tr><td class="ag-mono">104</td><td>database</td><td><span class="ag-status ag-tone-ok">Running</span></td><td class="ag-num">12.8%</td><td class="ag-num">512 MB</td></tr>
+            <tr><td class="ag-mono">107</td><td>worker</td><td><span class="ag-status ag-tone-warn">Idle</span></td><td class="ag-num">0.1%</td><td class="ag-num">64 MB</td></tr>
+            <tr><td class="ag-mono">112</td><td>cache</td><td><span class="ag-status ag-status--off">Stopped</span></td><td class="ag-num">0.0%</td><td class="ag-num">0 MB</td></tr>
+          </tbody>
+          <tfoot><tr><td colspan="3">Total</td><td class="ag-num">15.3%</td><td class="ag-num">704 MB</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+    <div class="ag-grid" style="--ag-grid-min: 280px">
+      <div class="spec">
+        <code class="ag-code">.ag-brackets &gt; .ag-plate</code>
+        <p class="spec-note">The hero panel, with two cut corners, for the one to three headline readings on a screen. <code>.ag-brackets</code> frames it.</p>
+        <div class="ag-brackets" style="padding: 10px">
+          <div class="ag-plate">
+            <div class="ag-card__head"><span>Throughput</span><span>NET-01</span></div>
+            <div class="ag-value ag-value--xl">940<span class="ag-unit">Mb/s</span></div>
+            <dl class="ag-kv"><dt>Peak</dt><dd>1.2 Gb/s</dd><dt>Latency</dt><dd>8 ms</dd></dl>
+          </div>
+        </div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-card + .ag-meter</code>
+        <p class="spec-note">The standard tile: one job, one hero number. Only the single most important number on a screen takes <code>.ag-value--accent</code>.</p>
+        <div class="ag-card">
+          <div class="ag-card__head"><span>Storage used</span><span>ST-02</span></div>
+          <div class="ag-value ag-value--accent">1.84<span class="ag-unit">TB</span></div>
+          <div class="ag-meter" aria-hidden="true"><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span></span><span></span><span></span><span></span><span></span></div>
+          <span class="ag-code">Of 3.00 TB</span>
+        </div>
+      </div>
+      <div class="spec">
+        <code class="ag-code">.ag-card + .ag-hazard--thin</code>
+        <p class="spec-note">Countdowns and warnings: a toned text tag, the value, then thin hazard tape while the clock runs.</p>
+        <div class="ag-card">
+          <div class="ag-card__head"><span>Maintenance</span><span>MW-03</span></div>
+          <span class="ag-tag ag-tag--text ag-tone-warn">Window opens in</span>
+          <div class="ag-value">03:12</div>
+          <div class="ag-hazard ag-hazard--thin" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 Patterns ===== -->
+  <section class="section" id="patterns">
+    <div class="section__head">
+      <h2>09 Patterns &amp; devices</h2>
+      <p class="ag-text">Bigger pieces built from the parts above, plus the small marks that give the system its edge.</p>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-brackets &gt; .ag-plate &gt; .ag-lead</code>
+      <p class="spec-note">A lead article: a numbered plate with a wide headline. <code>.ag-display--md</code> suits a headline of up to two lines.</p>
+      <div class="ag-brackets" style="padding: 12px">
+        <article class="ag-plate">
+          <div class="ag-row" style="--ag-gap: 14px"><span class="ag-tag">Featured &#xB7; Design</span><span class="ag-code">[AUTHOR] &#xB7; 05:41</span></div>
+          <div class="ag-lead">
+            <div class="ag-lead__num">01</div>
+            <div class="ag-lead__body">
+              <h3 class="ag-display ag-display--md">One stylesheet, no framework, and nothing to install</h3>
+              <p class="ag-text">How a single CSS file covers type, forms, navigation and data, and why it stays that way.</p>
+              <a class="ag-btn ag-btn--accent" href="#patterns" style="align-self: flex-start">Read more &#x25B8;</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="spec">
+      <code class="ag-code">.ag-card.ag-story</code>
+      <p class="spec-note">Article or post lists in an <code>.ag-grid</code>. Headlines use Chakra Petch, never the wide face.</p>
+      <div class="ag-grid" style="--ag-grid-min: 300px">
+        <article class="ag-card ag-story">
+          <div class="ag-story__num">02</div>
+          <div class="ag-story__body"><span class="ag-tag ag-tag--text">Guide</span><h3 class="ag-story__title"><a href="#patterns">Choosing a highlight colour that works on both themes</a></h3><span class="ag-story__meta">[AUTHOR] &#xB7; 05:12</span></div>
+        </article>
+        <article class="ag-card ag-story">
+          <div class="ag-story__num">03</div>
+          <div class="ag-story__body"><span class="ag-tag ag-tag--text">Notes</span><h3 class="ag-story__title"><a href="#patterns">Why every status needs a word as well as a colour</a></h3><span class="ag-story__meta">[AUTHOR] &#xB7; 02:52</span></div>
+        </article>
+      </div>
+    </div>
+    <p class="spec-note">The devices below are decoration: use one or two per screen and give each <code>aria-hidden="true"</code>. Code stamps (<code>.ag-code</code>) label real things, never filler.</p>
+    <div class="ag-grid" style="--ag-grid-min: 220px">
+      <div class="spec"><code class="ag-code">.ag-hazard</code><div class="ag-hazard" aria-hidden="true"></div></div>
+      <div class="spec"><code class="ag-code">.ag-hazard--thin</code><div class="ag-hazard ag-hazard--thin" aria-hidden="true"></div></div>
+      <div class="spec"><code class="ag-code">.ag-barcode</code><span class="ag-barcode" aria-hidden="true"></span></div>
+      <div class="spec"><code class="ag-code">.ag-brackets--accent</code><div class="ag-brackets ag-brackets--accent"><span class="ag-label">Framed</span></div></div>
+      <div class="spec"><code class="ag-code">.ag-divider-label</code><div class="ag-divider-label">End of transmission</div></div>
+      <div class="spec"><code class="ag-code">.ag-divider &#xB7; hr</code><hr></div>
+    </div>
+  </section>
+
+
+  <!-- ===== Versions ===== -->
+  <section class="section" id="versions">
+    <div class="section__head">
+      <h2>Versions</h2>
+      <p class="ag-text">Each major version lives in its own folder. Fixes and new elements go into the current folder in place, so every site linking to it updates within minutes. Anything that would break existing markup ships as a new folder instead.</p>
+    </div>
+    <div class="ag-table-wrap"><table class="ag-table">
+      <thead><tr><th>Folder</th><th>Latest</th><th>Status</th><th>Stylesheet</th><th>Release notes</th></tr></thead>
+      <tbody>
+        <tr><td class="ag-mono">/v2/</td><td class="ag-mono">2.3 &#xB7; 16 Oct 2026</td><td><span class="ag-status ag-tone-ok">Current</span></td><td class="ag-mono"><a href="v2/anti-gravity.css">v2/anti-gravity.css</a></td><td><a href="v2/">What changed in v2</a></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <aside class="ai-note" aria-label="About how this was made">
+    <span class="ag-label">AI disclosure</span>
+    <p class="spec-note">AI was used in creating this stylesheet. Anti-Gravity was designed and directed by a person, with an AI model (Claude, by Anthropic) helping to write the CSS, the documentation and the examples.</p>
+  </aside>
+  <footer class="ag-footer">
+    <span>&#x25B2; style.rogues.nexus &#xB7; anti-gravity.css v2.3</span>
+    <span>MIT licence</span>
+  </footer>
+</div>
+
+<!-- Dialog -->
+<dialog class="ag-dialog" id="demo-dialog" aria-labelledby="dlg-title">
+  <div class="ag-hazard ag-hazard--thin" aria-hidden="true"></div>
+  <div class="ag-dialog__head"><span id="dlg-title">Wipe cache?</span><button class="ag-btn ag-btn--icon ag-btn--ghost" type="button" data-close aria-label="Close">&#xD7;</button></div>
+  <div class="ag-dialog__body">This clears 148 cached items. The next load fetches everything again, which takes about a minute.</div>
+  <div class="ag-dialog__foot">
+    <button class="ag-btn" type="button" data-close>Keep cache</button>
+    <button class="ag-btn ag-btn--danger" type="button" data-close>Wipe cache</button>
+  </div>
+</dialog>
+
+<div class="ag-toast-stack" id="toasts" aria-live="polite"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  /* ---- Prose placement demo ---- */
+  (function () {
+    var group = document.querySelector('.js-prose-align'), demo = document.getElementById('prose-demo');
+    if (!group || !demo) return;
+    var mods = ['ag-prose--center', 'ag-prose--right', 'ag-prose--full'];
+    group.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-prose]'); if (!btn) return;
+      group.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      mods.forEach(function (m) { demo.classList.remove(m); });
+      var m = btn.getAttribute('data-prose'); if (m) demo.classList.add(m);
+      var code = demo.parentNode.querySelector('.snippet code');
+      if (code) code.textContent = code.textContent.replace(/<article class="[^"]*"/, '<article class="ag-prose' + (m ? ' ' + m : '') + ' ag-plate"');
+    });
+  })();
+
+  /* ---- Code snippets: built from each live example before anything changes it ---- */
+  (function () {
+    function clean(node) {
+      [node].concat(Array.prototype.slice.call(node.querySelectorAll('*'))).filter(function (el) { return el.hasAttribute('class'); }).forEach(function (el) {
+        var c = Array.prototype.filter.call(el.classList, function (n) { return n.indexOf('js-') !== 0 && n !== 'snip-skip'; });
+        if (c.length) el.setAttribute('class', c.join(' ')); else el.removeAttribute('class');
+      });
+      [node].concat(Array.prototype.slice.call(node.querySelectorAll('[data-set-accent], [data-toast], [data-copy]'))).forEach(function (el) {
+        el.removeAttribute('data-set-accent'); el.removeAttribute('data-toast'); el.removeAttribute('data-copy');
+      });
+      return node;
+    }
+    function dedent(html) {
+      var lines = html.replace(/\s+$/, '').split('\n');
+      if (lines.length < 2) return html;
+      var last = lines[lines.length - 1].match(/^\s*/)[0].length;
+      return lines.map(function (l, i) { return i === 0 ? l : l.slice(Math.min(last, l.match(/^\s*/)[0].length)); }).join('\n');
+    }
+    document.querySelectorAll('.spec').forEach(function (spec) {
+      var parts = [];
+      var from = spec.getAttribute('data-snippet-from');
+      if (from) { var src = document.getElementById(from); if (src) parts.push(src); }
+      else Array.prototype.forEach.call(spec.children, function (el) {
+        if (el.matches('code.ag-code, .spec-note, .snip-skip, script')) return;
+        parts.push(el);
+      });
+      if (!parts.length) return;
+      parts = parts.map(function (el) { var c = el.cloneNode(true); if (c.id === 'prose-demo') c.removeAttribute('id'); return c; });
+      var text = parts.map(function (el) { return dedent(clean(el.cloneNode(true)).outerHTML); }).join('\n');
+      var d = document.createElement('details'); d.className = 'snippet';
+      var s = document.createElement('summary'); s.textContent = 'Code';
+      var pre = document.createElement('pre'); var code = document.createElement('code'); code.textContent = text; pre.appendChild(code);
+      var copy = document.createElement('button'); copy.type = 'button'; copy.className = 'ag-btn ag-btn--sm ag-btn--ghost snippet__copy'; copy.textContent = 'Copy';
+      copy.addEventListener('click', function (e) {
+        e.preventDefault();
+        var ok = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy'; }, 1400); };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, function () { copy.textContent = 'Select and copy'; });
+      });
+      s.appendChild(copy); d.appendChild(s); d.appendChild(pre); spec.appendChild(d);
+    });
+  })();
+
+  /* ---- Warn loudly if anti-gravity.css didn't load ---- */
+  var acLoaded = getComputedStyle(root).getPropertyValue('--ag-loaded').trim();
+  if (!acLoaded) {
+    var warn = document.createElement('div');
+    warn.setAttribute('role', 'alert');
+    warn.style.cssText = 'position:sticky;top:0;z-index:999;padding:14px 18px;background:#FF2A3D;color:#111113;font:600 15px/1.4 monospace';
+    warn.textContent = (getComputedStyle(root).getPropertyValue('--ag-bg').trim() ? 'anti-gravity.css only partly loaded: the file looks cut short or re-encoded. Download it again. ' : 'anti-gravity.css did not load. ') + 'This page expects it at v2/anti-gravity.css beside it.';
+    document.body.insertBefore(warn, document.body.firstChild);
+  }
+
+  /* ---- Colour helpers ---- */
+  function hexToRgb(hex) { var h = hex.replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); }
+  function lum(rgb) { var c = rgb.map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; }
+  function contrast(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function toHex(rgb) { return '#' + rgb.map(function (v) { return Math.round(v).toString(16).padStart(2, '0'); }).join('').toUpperCase(); }
+  function deepen(hex) { var rgb = hexToRgb(hex), bone = [251, 250, 247], k = 1; while (contrast(rgb.map(function (v) { return v * k; }), bone) < 4.5 && k > 0.05) k -= 0.05; return toHex(rgb.map(function (v) { return v * k; })); }
+  function shade(hex, target) { var rgb = hexToRgb(hex), bone = [251, 250, 247], k = 1; while (contrast(rgb.map(function (v) { return v * k; }), bone) < target && k > 0.05) k -= 0.01; return toHex(rgb.map(function (v) { return v * k; })); }
+
+  function refresh() {
+    var cs = getComputedStyle(root);
+    document.querySelectorAll('.js-token').forEach(function (el) { el.textContent = cs.getPropertyValue(el.dataset.token).trim().toUpperCase(); });
+  }
+  function press(list, active) { list.forEach(function (b) { b.setAttribute('aria-pressed', b === active ? 'true' : 'false'); }); }
+
+  /* ---- Theme ---- */
+  var themeBtn = document.getElementById('theme-toggle');
+  themeBtn.addEventListener('click', function () {
+    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    themeBtn.textContent = next === 'dark' ? 'Light' : 'Dark';
+    themeBtn.setAttribute('aria-label', 'Switch to ' + (next === 'dark' ? 'light' : 'dark') + ' theme');
+    refresh();
+  });
+
+  /* ---- Accent ---- */
+  var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-set-accent]'));
+  swatches.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      ['--ag-accent-dark', '--ag-accent-light', '--ag-accent-deep'].forEach(function (p) { root.style.removeProperty(p); });
+      root.dataset.accent = btn.dataset.setAccent;
+      swatches.forEach(function (s) { s.setAttribute('aria-pressed', s.dataset.setAccent === btn.dataset.setAccent ? 'true' : 'false'); });
+      refresh();
+    });
+  });
+  document.getElementById('custom-accent').addEventListener('input', function (e) {
+    root.removeAttribute('data-accent');
+    root.style.setProperty('--ag-accent-dark', e.target.value);
+    root.style.setProperty('--ag-accent-light', shade(e.target.value, 3.05));
+    root.style.setProperty('--ag-accent-deep', shade(e.target.value, 4.6));
+    press(swatches, null);
+    refresh();
+  });
+
+  /* ---- Site nav: highlight the section in view ---- */
+  /* Only the nav's own link row scrolls sideways; the page is never moved. */
+  var navList = document.getElementById('site-nav');
+  var navLinks = Array.prototype.slice.call(navList.querySelectorAll('a'));
+  function revealInNav(a) {
+    var left = a.offsetLeft, right = left + a.offsetWidth;
+    if (left < navList.scrollLeft) navList.scrollLeft = left - 8;
+    else if (right > navList.scrollLeft + navList.clientWidth) navList.scrollLeft = right - navList.clientWidth + 8;
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) {
+          if (a.getAttribute('href') === '#' + en.target.id) {
+            if (a.getAttribute('aria-current') !== 'page') { a.setAttribute('aria-current', 'page'); revealInNav(a); }
+          } else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.section').forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---- Demo navs ---- */
+  document.querySelectorAll('.js-demo-nav, .js-linkline').forEach(function (nav) {
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      nav.querySelectorAll('a').forEach(function (l) { l.removeAttribute('aria-current'); });
+      a.setAttribute('aria-current', 'page');
+    });
+  });
+
+  /* ---- Tabs with arrow keys ---- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.ag-tab'));
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { selectTab(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') selectTab(tabs[(i + 1) % tabs.length]);
+      if (e.key === 'ArrowLeft') selectTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+    });
+  });
+
+  /* ---- Menus, groups, toggles ---- */
+  document.querySelectorAll('.js-menu, .js-group').forEach(function (group) {
+    group.addEventListener('click', function (e) {
+      var item = e.target.closest('button'); if (!item) return;
+      press(Array.prototype.slice.call(group.querySelectorAll('button')), item);
+    });
+  });
+  document.querySelectorAll('.js-toggles').forEach(function (group) {
+    group.addEventListener('click', function (e) {
+      var t = e.target.closest('.ag-toggle'); if (!t) return;
+      var on = t.getAttribute('aria-pressed') !== 'true';
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      t.querySelector('.ag-toggle__state').textContent = on ? '100%' : 'Off';
+    });
+  });
+  document.querySelectorAll('.js-indeterminate').forEach(function (c) { c.indeterminate = true; });
+
+  /* ---- Range readout ---- */
+  var range = document.getElementById('f-range');
+  range.addEventListener('input', function () { document.getElementById('range-out').textContent = range.value; });
+
+  /* ---- Copy button ---- */
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.ag-codeblock').querySelector('code').innerText;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1400); };
+      if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () { btn.textContent = 'Blocked'; });
+    });
+  });
+
+  /* ---- Toasts ---- */
+  var toastText = {
+    ok: ['\u2713', 'Saved', 'Your settings are live.'],
+    warn: ['!', 'Slow response', 'The server took over 10 seconds to reply.'],
+    danger: ['\u2715', 'Upload failed', 'The server did not respond. Try again.'],
+    info: ['i', 'Update ready', 'Version 2.3 is available.']
+  };
+  var stack = document.getElementById('toasts');
+  function makeToast(kind) {
+    var t = toastText[kind], el = document.createElement('div');
+    el.className = 'ag-toast ag-tone-' + kind;
+    el.setAttribute('role', 'status');
+    el.innerHTML = '<span class="ag-toast__icon" aria-hidden="true"></span><div class="ag-toast__body"><strong class="ag-toast__title"></strong><span></span></div><button class="ag-toast__close" type="button" aria-label="Dismiss">\u00D7</button>';
+    el.querySelector('.ag-toast__icon').textContent = t[0];
+    el.querySelector('.ag-toast__title').textContent = t[1];
+    el.querySelector('.ag-toast__body span').textContent = t[2];
+    stack.appendChild(el);
+    setTimeout(function () { el.remove(); }, 4500);
+  }
+  document.querySelectorAll('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { makeToast(b.dataset.toast); }); });
+  document.addEventListener('click', function (e) { var c = e.target.closest('.ag-toast__close'); if (c) c.closest('.ag-toast').remove(); });
+
+  /* ---- Dialog ---- */
+  var dlg = document.getElementById('demo-dialog');
+  document.getElementById('open-dialog').addEventListener('click', function () { if (dlg.showModal) dlg.showModal(); });
+  dlg.addEventListener('click', function (e) { if (e.target.closest('[data-close]') || e.target === dlg) dlg.close(); });
+
+  refresh();
+})();
+</script>
+</body>
+</html>

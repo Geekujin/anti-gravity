@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-accent="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anti-Gravity v2</title>
+<meta name="description" content="Release notes for anti-gravity.css v2: what is new, what changed, what is deprecated and how to migrate.">
+<link rel="stylesheet" href="anti-gravity.css">
+<style>
+  .notes-head { display: flex; flex-direction: column; gap: 18px; padding: 40px 0 8px; }
+  .notes-head .ag-row { gap: 10px; flex-wrap: wrap; }
+  .release { display: flex; flex-direction: column; gap: 18px; padding: 40px 0; border-top: 1px solid var(--ag-rule); }
+  .release__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+  .release__head h2 { margin: 0; }
+  .change { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 16px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--ag-rule); }
+  .change:last-child { border-bottom: 0; }
+  .change > .ag-tag { justify-self: start; }
+  .change > * { min-width: 0; }
+  .change p { margin: 0; color: var(--ag-secondary); max-width: 74ch; }
+  .change p + p, .change p + pre, .change pre + p { margin-top: 10px; }
+  .change pre { margin-top: 10px; font-size: 13px; }
+  .change strong { color: var(--ag-ink); font-weight: 600; }
+  .ai-note { display: flex; flex-direction: column; gap: 8px; padding: 24px 0; border-top: 1px solid var(--ag-rule); }
+  .ai-note p { margin: 0; max-width: 72ch; color: var(--ag-secondary); font-size: 15px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; }
+  @media (max-width: 640px) { .change { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+</style>
+</head>
+<body class="ag">
+<div class="ag-shell">
+
+  <header class="notes-head">
+    <nav aria-label="Site">
+      <ul class="ag-linkline">
+        <li><a href="../">Docs</a></li>
+        <li><a href="../#versions">Versions</a></li>
+        <li><a href="./" aria-current="page">v2</a></li>
+      </ul>
+    </nav>
+    <span class="ag-code">ID:AG-0x02 &#xB7; Release notes</span>
+    <h1>Anti-Gravity v2</h1>
+    <p class="ag-text">Everything that changed in the <code>/v2/</code> stylesheet, newest first. Releases in this folder never break existing markup; anything that would ships in <code>/v3/</code> instead.</p>
+    <pre><code>&lt;link rel="stylesheet" href="https://style.rogues.nexus/v2/anti-gravity.css"&gt;</code></pre>
+    <div class="legend" aria-label="Key">
+      <span class="ag-tag ag-tone-danger">Breaking</span>
+      <span class="ag-tag ag-tone-ok">New</span>
+      <span class="ag-tag ag-tone-info">Changed</span>
+      <span class="ag-tag ag-tone-warn">Deprecated</span>
+    </div>
+  </header>
+
+  <section class="release" id="v2-3">
+    <div class="release__head">
+      <h2>2.3</h2>
+      <span class="ag-label">16 Oct 2026</span>
+      <span class="ag-status ag-tone-ok">Current</span>
+    </div>
+    <div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <div>
+          <p><strong>Prose placement</strong>: <code>.ag-prose--center</code> and <code>.ag-prose--right</code> move the reading column; <code>.ag-prose--left</code> is the default and can be set explicitly.</p>
+<pre><code>&lt;article class="ag-prose ag-prose--center"&gt;&#x2026;&lt;/article&gt;</code></pre>
+        </div>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong><code>.ag-prose--full</code></strong> drops the 70-character measure and fills the available width with a 16px gutter each side. On an <code>.ag-plate</code> the plate keeps its own padding.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Variables</strong> <code>--ag-prose-width</code> (the measure, default <code>70ch</code>) and <code>--ag-prose-gutter</code> (the full-width gutter, default <code>16px</code>).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="release" id="v2-2">
+    <div class="release__head">
+      <h2>2.2</h2>
+      <span class="ag-label">16 Oct 2026</span>
+    </div>
+    <div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <div>
+          <p><strong><code>.ag-linkline</code></strong>: a discreet text nav for under a site header. Links are separated by <code>//</code>; the current page sits on a highlight block. Rows wrap cleanly on narrow screens.</p>
+<pre><code>&lt;nav aria-label="Main"&gt;
+  &lt;ul class="ag-linkline"&gt;
+    &lt;li&gt;&lt;a href="/" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/projects/"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong><code>.ag-linkline--text</code></strong>: the same nav with the current page in highlight-coloured text and a chevron instead of a block.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="release" id="v2-1">
+    <div class="release__head">
+      <h2>2.1</h2>
+      <span class="ag-label">16 Oct 2026</span>
+    </div>
+    <div>
+      <div class="change">
+        <span class="ag-tag ag-tone-info">Changed</span>
+        <div>
+          <p><strong>Toned tags and alert titles add their status glyph automatically</strong> (&#x2713; ok, ! warn, &#x2715; danger, i info), so status never relies on colour alone.</p>
+          <p>Check your markup: if you typed a glyph into a toned tag or an alert title yourself, remove it or it will show twice.</p>
+        </div>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-info">Changed</span>
+        <p><strong>The info tone is now neutral grey</strong> (<code>#C9C7C3</code> on Void, <code>#3A3A40</code> on Bone) instead of cyan, so it can never be confused with a highlight. Info fills on Bone take Bone text.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-info">Changed</span>
+        <p><strong>Danger status lamps always blink</strong>, with or without <code>--pulse</code>. They stop under reduced motion like everything else.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-info">Changed</span>
+        <p><strong>Signal's deep shade</strong> for small text on Bone moved from <code>#E50014</code> to <code>#E0102A</code>, keeping it at 4.5:1 while staying closer to the main red.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Variables</strong> <code>--ag-info-fill</code>, <code>--ag-info-on</code>, <code>--ag-on-tone</code> and <code>--ag-tone-glyph</code> for building your own toned components.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="release" id="v2-0">
+    <div class="release__head">
+      <h2>2.0</h2>
+      <span class="ag-label">6 Oct 2026</span>
+    </div>
+    <p class="ag-text">The first public release under the Anti-Gravity name. If you used a pre-release copy (<code>anti-corpo.css</code> or <code>rogue-signal.css</code>), these changes break your markup; see the migration table below.</p>
+    <div>
+      <div class="change">
+        <span class="ag-tag ag-tone-danger">Breaking</span>
+        <p><strong>Class prefix is now <code>ag-</code></strong> (was <code>ac-</code> or <code>rs-</code>), and the body class is <code>class="ag"</code>.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-danger">Breaking</span>
+        <p><strong>The file is <code>anti-gravity.css</code></strong>, served from <code>https://style.rogues.nexus/v2/</code>.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-danger">Breaking</span>
+        <div>
+          <p><strong>A custom highlight takes three variables</strong>: one for Void, one for Bone fills and large text (3:1 or more), and one for small text on Bone (4.5:1 or more).</p>
+<pre><code>:root {
+  --ag-accent-dark:  #7CFF4F;
+  --ag-accent-light: #4EA132;
+  --ag-accent-deep:  #3E7F27;
+}</code></pre>
+        </div>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Six highlights</strong> through <code>data-accent</code>: <code>signal</code> (default), <code>neon</code>, <code>jensen</code>, <code>2077</code>, <code>hack</code> and <code>gibson</code>. Each has a shade tuned for Bone; 2077 is yellow on Void and turns grey on Bone.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Code and terminal</strong>: <code>.ag-codeblock</code>, styled plain <code>pre</code>, highlight.js and Prism colours, <code>.ag-prompt</code>, <code>.ag-cursor</code> and <code>.ag-log</code>.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Forms</strong>: every native control styled with no classes, plus <code>.ag-field</code>, <code>.ag-input-group</code>, square checkboxes, diamond radios, slanted switches and <code>.ag-range</code>.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Navigation</strong>: <code>.ag-nav</code> with slant and <code>--notch</code> variants, <code>.ag-tabs</code>, <code>.ag-crumbs</code>, <code>.ag-pager</code>, <code>.ag-dropdown</code>, <code>.ag-menu</code> and <code>.ag-list</code>.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <p><strong>Inverse kana</strong>: <code>.ag-kana--inverse</code> sets the word on a highlight block in the page colour; add <code>.ag-kana--ink</code> for ink-coloured text.</p>
+      </div>
+      <div class="change">
+        <span class="ag-tag ag-tone-ok">New</span>
+        <div>
+          <p><strong>Load marker</strong>: the file ends with <code>--ag-loaded: 1</code>, so a page can detect a cut-off or mangled download. The file is plain ASCII, so it survives any re-encoding.</p>
+<pre><code>getComputedStyle(document.documentElement).getPropertyValue('--ag-loaded').trim() === '1'</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="release" id="deprecated">
+    <div class="release__head">
+      <h2>Deprecated in v2</h2>
+    </div>
+    <p class="ag-text">These still work in every v2 release and will be removed in v3. Swap them when you next touch the page.</p>
+    <div class="ag-table-wrap"><table class="ag-table">
+      <thead><tr><th></th><th>Deprecated</th><th>Use instead</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ag-tag ag-tone-warn">Deprecated</span></td><td class="ag-mono">data-accent="pink"</td><td class="ag-mono">data-accent="neon"</td></tr>
+        <tr><td><span class="ag-tag ag-tone-warn">Deprecated</span></td><td class="ag-mono">data-accent="orange"</td><td class="ag-mono">data-accent="jensen"</td></tr>
+        <tr><td><span class="ag-tag ag-tone-warn">Deprecated</span></td><td class="ag-mono">data-accent="cyan"</td><td class="ag-mono">data-accent="gibson"</td></tr>
+        <tr><td><span class="ag-tag ag-tone-warn">Deprecated</span></td><td class="ag-mono">--ag-accent: #...</td><td>The three shade variables (<code>--ag-accent-dark</code>, <code>-light</code>, <code>-deep</code>)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="ag-text">Removed in v2: nothing.</p>
+  </section>
+
+  <section class="release" id="migrate">
+    <div class="release__head">
+      <h2>Migrating from a pre-release copy</h2>
+    </div>
+    <div class="ag-table-wrap"><table class="ag-table">
+      <thead><tr><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+        <tr><td class="ag-mono">&lt;link href="anti-corpo.css"&gt; / rogue-signal.css</td><td class="ag-mono">&lt;link href="https://style.rogues.nexus/v2/anti-gravity.css"&gt;</td></tr>
+        <tr><td class="ag-mono">&lt;body class="ac"&gt; / class="rs"</td><td class="ag-mono">&lt;body class="ag"&gt;</td></tr>
+        <tr><td class="ag-mono">.ac-* / .rs-*</td><td class="ag-mono">.ag-*</td></tr>
+        <tr><td class="ag-mono">--ac-* / --rs-*</td><td class="ag-mono">--ag-*</td></tr>
+        <tr><td class="ag-mono">--ag-accent + --ag-accent-deep</td><td class="ag-mono">--ag-accent-dark + --ag-accent-light + --ag-accent-deep</td></tr>
+        <tr><td>A glyph typed into a toned tag or alert title</td><td>Delete it; the stylesheet adds it</td></tr>
+      </tbody>
+    </table></div>
+    <p class="ag-text">A find-and-replace of <code>ac-</code> or <code>rs-</code> to <code>ag-</code> across your HTML and CSS covers most of it. Check the result against the <a href="../">docs</a>.</p>
+  </section>
+
+  <aside class="ai-note" aria-label="About how this was made">
+    <span class="ag-label">AI disclosure</span>
+    <p>AI was used in creating this stylesheet. Anti-Gravity was designed and directed by a person, with an AI model (Claude, by Anthropic) helping to write the CSS, the documentation and the examples.</p>
+  </aside>
+  <footer class="ag-footer">
+    <span>&#x25B2; style.rogues.nexus &#xB7; anti-gravity.css v2.3</span>
+    <span><a href="../">Back to docs</a></span>
+  </footer>
+</div>
+</body>
+</html>
