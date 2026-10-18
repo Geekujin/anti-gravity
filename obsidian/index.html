@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-accent="signal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anti-Gravity for Obsidian</title>
+<meta name="description" content="Anti-Gravity theme for Obsidian: download, install, configure and use it.">
+<link rel="stylesheet" href="../v2/anti-gravity.css">
+<style>
+  /* Page-only helpers. Not part of anti-gravity.css. */
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); background: var(--ag-bg); }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 96px); scroll-behavior: smooth; }
+  .ag-nav--sticky { top: env(safe-area-inset-top, 0px); }
+  .section { display: flex; flex-direction: column; gap: 28px; }
+  .section__head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 14px; border-bottom: 2px solid var(--ag-rule); }
+  .spec-note { margin: 0; max-width: 72ch; color: var(--ag-secondary); font-size: 15px; line-height: 1.5; }
+  .steps { display: grid; gap: 28px; }
+  .step { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .step__num { font-family: var(--ag-font-display); font-size: 28px; line-height: 1; color: var(--ag-accent); }
+  .step__body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .step__body h3 { margin: 0; }
+  .step__body ul { margin: 0; }
+  .download { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+  .download__meta { display: flex; flex-direction: column; gap: 4px; font-family: var(--ag-font-mono); font-size: 12px; text-transform: uppercase; color: var(--ag-muted); }
+  .hash { display: block; margin-top: 4px; font-family: var(--ag-font-mono); font-size: 13px; color: var(--ag-secondary); word-break: break-all; text-transform: none; }
+  .tree { font-size: 14px; line-height: 1.6; }
+  .ai-note { display: flex; flex-direction: column; gap: 8px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--ag-rule); }
+  @media (max-width: 640px) { .step { grid-template-columns: 1fr; gap: 8px; } .ag-nav__end .ag-swatch { display: none; } }
+</style>
+</head>
+<body class="ag">
+
+<nav class="ag-nav ag-nav--sticky" aria-label="Sections">
+  <a class="ag-nav__brand" href="../">Anti-Gravity</a>
+  <ul class="ag-nav__links" id="site-nav">
+    <li><a href="#install" aria-current="page">Install</a></li>
+    <li><a href="#configure">Configure</a></li>
+    <li><a href="#use">Use</a></li>
+    <li><a href="#pdf">PDF</a></li>
+    <li><a href="#update">Update</a></li>
+    <li><a href="#help">Help</a></li>
+  </ul>
+  <div class="ag-nav__end">
+    <button class="ag-btn ag-btn--sm" type="button" id="theme-toggle" aria-label="Switch to light theme">Light</button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="signal" aria-pressed="true" aria-label="Signal red" style="--ag-swatch: var(--ag-signal)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="neon" aria-pressed="false" aria-label="Neon pink" style="--ag-swatch: var(--ag-neon)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="jensen" aria-pressed="false" aria-label="Jensen orange" style="--ag-swatch: var(--ag-jensen)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="2077" aria-pressed="false" aria-label="2077 yellow" style="--ag-swatch: var(--ag-2077)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="hack" aria-pressed="false" aria-label="Hack green" style="--ag-swatch: var(--ag-hack)"><span></span></button>
+    <button class="ag-swatch ag-swatch--sm" type="button" data-set-accent="gibson" aria-pressed="false" aria-label="Gibson cyan" style="--ag-swatch: var(--ag-gibson)"><span></span></button>
+  </div>
+</nav>
+
+<div class="ag-shell" id="top" style="gap: 72px">
+
+  <!-- ===== Header ===== -->
+  <header class="ag-header">
+    <div class="ag-header__bar">
+      <span class="ag-code">ID:AG-OBS &#xB7; theme v1.3.3 &#xB7; style.rogues.nexus/obsidian</span>
+      <span class="ag-barcode" aria-hidden="true"></span>
+      <span class="ag-status ag-status--pulse">Ready to deploy</span>
+    </div>
+    <h1 class="ag-display ag-display--xl ag-glow">Anti-<span class="ag-accent">gravity</span> for Obsidian</h1>
+    <div class="ag-hazard" aria-hidden="true"></div>
+    <p class="ag-text">The Anti-Gravity style, rebuilt as an Obsidian theme. Wide display headings, chamfered plates, hazard-edged alerts, corner brackets and one highlight colour. Void for dark mode, Bone for light. Your notes will look like they were issued by a mildly hostile orbital authority.</p>
+    <p class="ag-text">One zip, one folder, no account, no plugin required. Fonts are embedded, and the theme never makes a network request.</p>
+
+    <div class="download">
+      <a class="ag-btn ag-btn--primary ag-btn--lg" href="Anti-Gravity-obsidian.zip" download>Download theme</a>
+      <div class="download__meta">
+        <span>Anti-Gravity-obsidian.zip &#xB7; 134 KB &#xB7; v1.3.3</span>
+        <span>Requires Obsidian 1.5 or later &#xB7; desktop and mobile</span>
+      </div>
+    </div>
+    <details class="ag-plate" style="padding: 14px 18px">
+      <summary class="ag-label" style="cursor: pointer">Verify the download (SHA-256)</summary>
+      <p class="spec-note" style="margin-top: 10px">Paranoia is a feature. Compare this against the file you downloaded.</p>
+      <!-- Update this hash whenever Anti-Gravity-obsidian.zip changes: sha256sum Anti-Gravity-obsidian.zip -->
+      <code class="hash">1c6a4a79dea1f713ebbe0b0323c047f46603ee092a4988074462b8223210a290</code>
+<pre><code># Linux / macOS
+sha256sum Anti-Gravity-obsidian.zip
+shasum -a 256 Anti-Gravity-obsidian.zip
+
+# Windows (PowerShell)
+Get-FileHash .\Anti-Gravity-obsidian.zip -Algorithm SHA256</code></pre>
+    </details>
+  </header>
+
+
+  <!-- ===== 01 Install ===== -->
+  <section class="section" id="install">
+    <div class="section__head">
+      <h2>01 Install</h2>
+      <p class="ag-text">Five steps. The only way to get it wrong is step three, so read step three.</p>
+    </div>
+    <div class="steps">
+
+      <div class="step"><div class="step__num">01</div><div class="step__body">
+        <h3>Download the zip</h3>
+        <p class="spec-note">Use the button above. Save it somewhere you can find it again, which is a higher bar than it sounds.</p>
+      </div></div>
+
+      <div class="step"><div class="step__num">02</div><div class="step__body">
+        <h3>Open your vault's themes folder</h3>
+        <p class="spec-note">In Obsidian, open <b>Settings &#x2192; Appearance</b>. Next to <b>Themes</b>, click the folder icon. Obsidian opens <code>&lt;your vault&gt;/.obsidian/themes/</code> for you, and creates it if it doesn't exist yet.</p>
+        <p class="spec-note">The <code>.obsidian</code> folder is hidden on macOS and Linux, which is why the button is the easy route. Doing it by hand: <span class="ag-kbd">Cmd</span> <span class="ag-kbd">Shift</span> <span class="ag-kbd">.</span> shows hidden files in Finder, <span class="ag-kbd">Ctrl</span> <span class="ag-kbd">H</span> in most Linux file managers.</p>
+      </div></div>
+
+      <div class="step"><div class="step__num">03</div><div class="step__body">
+        <h3>Extract it into that folder</h3>
+        <p class="spec-note">The zip contains a single folder called <code>Anti-Gravity</code>. It must end up directly inside <code>themes</code>, like this:</p>
+<pre class="tree"><code>&lt;your vault&gt;/
+&#x2514;&#x2500; .obsidian/
+   &#x2514;&#x2500; themes/
+      &#x2514;&#x2500; Anti-Gravity/
+         &#x251C;&#x2500; manifest.json   &#x2190; required
+         &#x251C;&#x2500; theme.css       &#x2190; required
+         &#x251C;&#x2500; OFL.txt         font licence
+         &#x2514;&#x2500; README.md       reference</code></pre>
+        <div class="ag-alert ag-tone-warn" role="note"><div class="ag-alert__body">
+          <span class="ag-alert__title">The double-folder trap</span>
+          <span class="ag-alert__text">Windows "Extract All" and some macOS tools wrap everything in an extra folder named after the zip, giving you <code>themes/Anti-Gravity-obsidian/Anti-Gravity/</code>. Obsidian will not look inside it. Move the inner <code>Anti-Gravity</code> folder up one level and delete the empty wrapper.</span>
+        </div></div>
+<pre><code># Linux / macOS, from inside the themes folder
+unzip ~/Downloads/Anti-Gravity-obsidian.zip</code></pre>
+      </div></div>
+
+      <div class="step"><div class="step__num">04</div><div class="step__body">
+        <h3>Reload Obsidian</h3>
+        <p class="spec-note">Newer versions of Obsidian don't always show a refresh button next to Themes. Reload instead:</p>
+        <ul>
+          <li><b>Desktop:</b> open the command palette (<span class="ag-kbd">Ctrl</span> <span class="ag-kbd">P</span>, or <span class="ag-kbd">Cmd</span> <span class="ag-kbd">P</span> on macOS) and run <b>Reload app without saving</b>. Quitting and reopening also works.</li>
+          <li><b>Mobile:</b> close the app fully from your recent apps, then open it again.</li>
+        </ul>
+      </div></div>
+
+      <div class="step"><div class="step__num">05</div><div class="step__body">
+        <h3>Select the theme</h3>
+        <p class="spec-note"><b>Settings &#x2192; Appearance &#x2192; Themes</b>, choose <b>Anti-Gravity</b>. Light and dark follow Obsidian's own <b>Base color scheme</b> setting on the same page.</p>
+        <div class="ag-alert ag-tone-info" role="note"><div class="ag-alert__body">
+          <span class="ag-alert__title">"This theme didn't provide a readme"</span>
+          <span class="ag-alert__text">Expected, and harmless. Obsidian only fetches readmes from its online theme directory, never from your local folder. The README is in the theme folder if you want it.</span>
+        </div></div>
+      </div></div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== 02 Configure ===== -->
+  <section class="section" id="configure">
+    <div class="section__head">
+      <h2>02 Configure</h2>
+      <p class="ag-text">Optional. The defaults are fine. The options are there for people who disagree.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step__num">06</div><div class="step__body">
+        <h3>Install Style Settings</h3>
+        <p class="spec-note"><b>Settings &#x2192; Community plugins</b>. If restricted mode is on, turn it off. Click <b>Browse</b>, search for <b>Style Settings</b>, install it, then enable it. Its options appear under <b>Settings &#x2192; Style Settings &#x2192; Anti-Gravity</b>.</p>
+        <div class="ag-table-wrap"><table class="ag-table ag-table--compact">
+          <thead><tr><th>Option</th><th>Default</th><th>Does</th></tr></thead>
+          <tbody>
+            <tr><td>Highlight</td><td class="ag-mono">Signal</td><td>Switches the highlight colour everywhere.</td></tr>
+            <tr><td>Disable glow</td><td class="ag-mono">Off</td><td>Removes the soft glow on headings and indicators in dark mode.</td></tr>
+            <tr><td>Disable chamfered corners</td><td class="ag-mono">Off</td><td>Square corners on code blocks, callouts, modals and buttons.</td></tr>
+            <tr><td>Mixed-case headings</td><td class="ag-mono">Off</td><td>Stops headings being forced to uppercase.</td></tr>
+            <tr><td>Classic callouts</td><td class="ag-mono">Off</td><td>Plain bracket bar instead of the hazard edge, with Obsidian's icons.</td></tr>
+            <tr><td>Light PDF export</td><td class="ag-mono">Off</td><td>Exports PDFs in Bone instead of Void. For paper.</td></tr>
+            <tr><td>Hazard tape rules</td><td class="ag-mono">Off</td><td>Turns every <code>---</code> into hazard tape.</td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+
+      <div class="step"><div class="step__num">07</div><div class="step__body">
+        <h3>Or set the highlight without a plugin</h3>
+        <p class="spec-note">Create a file in <code>.obsidian/snippets/</code>, for example <code>ag-highlight.css</code>, then enable it under <b>Settings &#x2192; Appearance &#x2192; CSS snippets</b>.</p>
+        <figure class="ag-codeblock">
+          <figcaption class="ag-codeblock__head"><span>ag-highlight.css</span><button class="ag-codeblock__copy" type="button" data-copy>Copy</button></figcaption>
+<pre><code>/* Gibson cyan. Swap the three values for any row below. */
+body {
+  --ag-accent-dark: #00D9FF;
+  --ag-accent-light: #009EB9;
+  --ag-accent-deep: #007D93;
+}</code></pre>
+        </figure>
+        <div class="ag-table-wrap"><table class="ag-table ag-table--compact">
+          <thead><tr><th>Name</th><th>Dark</th><th>Light</th><th>Deep</th></tr></thead>
+          <tbody>
+            <tr><td>Signal</td><td class="ag-mono">#FF2A3D</td><td class="ag-mono">#FF2A3D</td><td class="ag-mono">#E0102A</td></tr>
+            <tr><td>Neon</td><td class="ag-mono">#FF3FA4</td><td class="ag-mono">#FF3FA4</td><td class="ag-mono">#DE0075</td></tr>
+            <tr><td>Jensen</td><td class="ag-mono">#FA5C00</td><td class="ag-mono">#FA5C00</td><td class="ag-mono">#C64900</td></tr>
+            <tr><td>2077</td><td class="ag-mono">#F5CC00</td><td class="ag-mono">#909090</td><td class="ag-mono">#727272</td></tr>
+            <tr><td>Hack</td><td class="ag-mono">#39FF14</td><td class="ag-mono">#1AA700</td><td class="ag-mono">#158400</td></tr>
+            <tr><td>Gibson</td><td class="ag-mono">#00D9FF</td><td class="ag-mono">#009EB9</td><td class="ag-mono">#007D93</td></tr>
+          </tbody>
+        </table></div>
+      </div></div>
+
+      <div class="step"><div class="step__num">08</div><div class="step__body">
+        <h3>Phones and other devices</h3>
+        <p class="spec-note">The theme lives inside the vault, so it travels with it.</p>
+        <ul>
+          <li><b>Obsidian Sync:</b> turn on <b>Themes and snippets</b> under <b>Settings &#x2192; Sync</b> on each device.</li>
+          <li><b>Syncthing, iCloud, Git or similar:</b> make sure the <code>.obsidian</code> folder is included. Many setups skip dot-folders by default.</li>
+          <li><b>No sync:</b> copy the <code>Anti-Gravity</code> folder into <code>.obsidian/themes/</code> on the device. You'll need a file manager that shows hidden folders.</li>
+        </ul>
+        <p class="spec-note">Then select the theme on each device. Theme choice is stored per device.</p>
+      </div></div>
+    </div>
+  </section>
+
+
+  <!-- ===== 03 Use ===== -->
+  <section class="section" id="use">
+    <div class="section__head">
+      <h2>03 Use</h2>
+      <p class="ag-text">Most of the theme works on plain Markdown. Three extras need callout syntax.</p>
+    </div>
+
+    <div class="ag-table-wrap"><table class="ag-table">
+      <thead><tr><th>Write this</th><th>You get</th></tr></thead>
+      <tbody>
+        <tr><td class="ag-mono">---</td><td>A flat 2px rule.</td></tr>
+        <tr><td class="ag-mono">&gt; [!hazard]</td><td>Hazard tape strip in the highlight colour.</td></tr>
+        <tr><td class="ag-mono">&gt; [!hazard|thick]</td><td>A heavier band of hazard tape.</td></tr>
+        <tr><td class="ag-mono">&gt; [!warning] Title</td><td>Alert box: hazard edge in the tone colour, display-type title, tone glyph.</td></tr>
+        <tr><td class="ag-mono">&gt; [!frame]</td><td>Corner brackets around the content, no title bar.</td></tr>
+        <tr><td class="ag-mono">&gt; [!frame|accent]</td><td>Corner brackets in the highlight colour.</td></tr>
+      </tbody>
+    </table></div>
+
+    <figure class="ag-codeblock">
+      <figcaption class="ag-codeblock__head"><span>example.md</span><button class="ag-codeblock__copy" type="button" data-copy>Copy</button></figcaption>
+<pre><code># Incident Report
+
+&gt; [!danger] Coffee machine offline
+&gt; Productivity has dropped to theoretical minimums.
+
+&gt; [!hazard]
+
+&gt; [!frame|accent]
+&gt; Root cause: someone descaled it with optimism.</code></pre>
+    </figure>
+
+    <div class="ag-stack" style="--ag-gap: 12px">
+      <span class="ag-label">Alert tones</span>
+      <div class="ag-table-wrap"><table class="ag-table ag-table--compact">
+        <thead><tr><th>Callout names</th><th>Tone</th><th>Glyph</th></tr></thead>
+        <tbody>
+          <tr><td class="ag-mono">tip &#xB7; hint &#xB7; important &#xB7; success &#xB7; check &#xB7; done</td><td><span class="ag-status ag-tone-ok">OK</span></td><td class="ag-mono">&#x2713;</td></tr>
+          <tr><td class="ag-mono">warning &#xB7; caution &#xB7; attention</td><td><span class="ag-status ag-tone-warn">Warn</span></td><td class="ag-mono">!</td></tr>
+          <tr><td class="ag-mono">question &#xB7; help &#xB7; faq</td><td><span class="ag-status ag-tone-warn">Warn</span></td><td class="ag-mono">?</td></tr>
+          <tr><td class="ag-mono">danger &#xB7; error &#xB7; bug &#xB7; failure &#xB7; fail &#xB7; missing</td><td><span class="ag-status ag-tone-danger">Danger</span></td><td class="ag-mono">&#x2715;</td></tr>
+          <tr><td class="ag-mono">note &#xB7; todo</td><td><span class="ag-status">Highlight</span></td><td class="ag-mono">&#x25B8; &#xB7; &#x25A1;</td></tr>
+          <tr><td class="ag-mono">info &#xB7; abstract &#xB7; summary &#xB7; tldr</td><td><span class="ag-status ag-tone-info">Neutral</span></td><td class="ag-mono">i</td></tr>
+          <tr><td class="ag-mono">example</td><td><span class="ag-status" style="--ag-tone: var(--ag-gibson)">Cyan</span></td><td class="ag-mono">&#x25C6;</td></tr>
+          <tr><td class="ag-mono">quote &#xB7; cite</td><td><span class="ag-status ag-status--off">Calm</span></td><td class="ag-mono">//</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+
+  <!-- ===== 04 PDF ===== -->
+  <section class="section" id="pdf">
+    <div class="section__head">
+      <h2>04 PDF export</h2>
+      <p class="ag-text">Obsidian exports every PDF in light mode, whatever you're looking at. The theme overrides that and exports in Void.</p>
+    </div>
+    <div class="ag-alert ag-tone-warn" role="note"><div class="ag-alert__body">
+      <span class="ag-alert__title">Set Margin to None</span>
+      <span class="ag-alert__text">In the <b>Export to PDF</b> dialog, set <b>Margin</b> to <b>None</b>. The theme adds its own padding to every page. Any other margin setting leaves a white border around each page.</span>
+    </div></div>
+    <p class="spec-note">Printing on actual paper? Turn on <b>Light PDF export</b> in Style Settings, unless you enjoy buying black ink.</p>
+  </section>
+
+
+  <!-- ===== 05 Update ===== -->
+  <section class="section" id="update">
+    <div class="section__head">
+      <h2>05 Update</h2>
+      <p class="ag-text">Manually installed themes don't update themselves. Check back here for new versions.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step__num">01</div><div class="step__body">
+        <h3>Replace the files</h3>
+        <p class="spec-note">Download the new zip and extract it over the existing <code>themes/Anti-Gravity</code> folder, overwriting everything. Strictly, replacing <code>theme.css</code> and <code>manifest.json</code> is enough.</p>
+      </div></div>
+      <div class="step"><div class="step__num">02</div><div class="step__body">
+        <h3>Reload</h3>
+        <p class="spec-note">Run <b>Reload app without saving</b>, or switch to another theme and back. Your Style Settings choices are kept.</p>
+      </div></div>
+    </div>
+  </section>
+
+
+  <!-- ===== 06 Help ===== -->
+  <section class="section" id="help">
+    <div class="section__head">
+      <h2>06 Troubleshooting</h2>
+      <p class="ag-text">Things that go wrong, and why they're usually the folder.</p>
+    </div>
+    <div class="ag-table-wrap"><table class="ag-table">
+      <thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Anti-Gravity isn't in the theme list</td><td>Check the path is exactly <code>.obsidian/themes/Anti-Gravity/theme.css</code>, with no extra folder in between. Then reload Obsidian.</td></tr>
+        <tr><td>Installed it, but on the wrong vault</td><td>Each vault has its own <code>.obsidian</code> folder. Use the folder icon in Settings from inside the vault you want.</td></tr>
+        <tr><td>Missing on phone after syncing</td><td>Your sync is probably skipping <code>.obsidian</code>, or Sync's <b>Themes and snippets</b> is off. Then select the theme on that device.</td></tr>
+        <tr><td>Highlight colour won't change</td><td>A CSS snippet setting <code>--ag-accent-*</code> overrides Style Settings. Disable the snippet, or edit it.</td></tr>
+        <tr><td>Some characters look different</td><td>The embedded fonts cover Latin and Western European text plus common symbols. Other scripts fall back to your system font.</td></tr>
+        <tr><td>PDF has a white border</td><td>Set <b>Margin</b> to <b>None</b> in the export dialog.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ag-brackets ag-brackets--accent">
+      <div class="ag-stack" style="--ag-gap: 8px">
+        <span class="ag-label">Privacy</span>
+        <p class="spec-note">The theme is a single CSS file. No scripts, no tracking, no remote fonts and no network requests of any kind. The fonts (Michroma, Chakra Petch and Share Tech Mono) are embedded and licensed under the SIL Open Font License 1.1; the licence is in <code>OFL.txt</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="ai-note" aria-label="About how this was made">
+    <span class="ag-label">AI disclosure</span>
+    <p class="spec-note">AI was used in creating this theme. Anti-Gravity for Obsidian was designed and directed by a person, with an AI model (Claude, by Anthropic) helping to write the CSS and this page.</p>
+  </aside>
+  <footer class="ag-footer">
+    <span>&#x25B2; style.rogues.nexus/obsidian &#xB7; theme v1.3.3</span>
+    <a href="../">Back to Anti-Gravity</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  /* ---- Warn loudly if anti-gravity.css didn't load ---- */
+  if (!getComputedStyle(root).getPropertyValue('--ag-loaded').trim()) {
+    var warn = document.createElement('div');
+    warn.setAttribute('role', 'alert');
+    warn.style.cssText = 'position:sticky;top:0;z-index:999;padding:14px 18px;background:#FF2A3D;color:#111113;font:600 15px/1.4 monospace';
+    warn.textContent = 'anti-gravity.css did not load. This page expects it at ../v2/anti-gravity.css.';
+    document.body.insertBefore(warn, document.body.firstChild);
+  }
+
+  /* ---- Theme ---- */
+  var themeBtn = document.getElementById('theme-toggle');
+  themeBtn.addEventListener('click', function () {
+    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    themeBtn.textContent = next === 'dark' ? 'Light' : 'Dark';
+    themeBtn.setAttribute('aria-label', 'Switch to ' + (next === 'dark' ? 'light' : 'dark') + ' theme');
+  });
+
+  /* ---- Accent ---- */
+  var swatches = Array.prototype.slice.call(document.querySelectorAll('[data-set-accent]'));
+  swatches.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      root.dataset.accent = btn.dataset.setAccent;
+      swatches.forEach(function (s) { s.setAttribute('aria-pressed', s === btn ? 'true' : 'false'); });
+    });
+  });
+
+  /* ---- Nav: highlight the section in view ---- */
+  var navList = document.getElementById('site-nav');
+  var navLinks = Array.prototype.slice.call(navList.querySelectorAll('a'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) {
+          if (a.getAttribute('href') === '#' + en.target.id) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.section').forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---- Copy buttons ---- */
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.ag-codeblock').querySelector('code').innerText;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1400); };
+      if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () { btn.textContent = 'Blocked'; });
+    });
+  });
+})();
+</script>
+</body>
+</html>
