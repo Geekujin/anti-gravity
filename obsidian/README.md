@@ -35,13 +35,13 @@ body { --ag-accent-dark: #00D9FF; --ag-accent-light: #009EB9; --ag-accent-deep: 
 ```
 
 ### Colour highlights
-Obsidian 1.14+ colours a highlight from the emoji at its start. Each maps to an Anti-Gravity colour; plain `==text==` keeps the active highlight.
+Obsidian 1.14+ colours a highlight from the emoji at its start. Each maps to an Anti-Gravity colour; plain `==text==` keeps the active highlight. Text on a highlight is always dark, so every colour uses its brightest (Void) shade in both modes.
 
 | Write         | Colour                      |
 | ------------- | --------------------------- |
 | `==🔴 text==` | Signal                      |
 | `==🟠 text==` | Jensen                      |
-| `==🟡 text==` | 2077 (stays yellow on Bone) |
+| `==🟡 text==` | 2077                        |
 | `==🟢 text==` | Hack                        |
 | `==🔵 text==` | Gibson                      |
 | `==🟣 text==` | Neon                        |
